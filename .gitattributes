@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------
+# Normalización de finales de línea.
+#
+# Windows termina las líneas con CRLF y Linux con LF. El servidor
+# que construye el sitio (Cloudflare Pages, GitHub Actions) es Linux.
+# Sin esta regla, un archivo editado en Windows aparece en el diff
+# como si hubieran cambiado TODAS sus líneas, aunque solo tocaras una.
+#
+# `text=auto eol=lf` guarda siempre LF dentro del repositorio,
+# independientemente de en qué sistema se edite.
+# ---------------------------------------------------------------
+* text=auto eol=lf
+
+# Binarios: git no debe tocarlos nunca
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.avif binary
+*.woff  binary
+*.woff2 binary
+*.pdf  binary
