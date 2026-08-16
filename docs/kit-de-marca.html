@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit de Marca — Modo Paranoia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --onix:#0D0E12; --carbono:#1F232B; --borde:#2C313C;
+  --texto:#E8EAF0; --texto-2:#A0A6B3;
+  --neon:#00FF66; --neon-deep:#00B348;
+  --ambar:#FFB020; --rojo:#FF5A5F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--onix);color:var(--texto);font-family:Inter,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:Syne,sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.mono{font-family:'JetBrains Mono',monospace}
+
+header.hero{padding:88px 0 64px;border-bottom:1px solid var(--borde)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--neon);margin-bottom:20px}
+header.hero h1{font-size:clamp(46px,8vw,86px);margin-bottom:10px}
+header.hero h1 .dot{color:var(--neon)}
+.slogan{font-family:'Space Grotesk',sans-serif;font-size:clamp(18px,2.6vw,25px);color:var(--texto-2);font-weight:400}
+.slogan b{color:var(--texto);font-weight:500}
+
+section{padding:64px 0;border-bottom:1px solid var(--borde)}
+section > .wrap > h2{font-size:clamp(26px,4vw,38px);margin-bottom:8px}
+.sub{color:var(--texto-2);margin-bottom:34px;max-width:66ch;font-size:15.5px}
+
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(232px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+.card{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;padding:22px}
+.card h4{font-size:17px;margin-bottom:9px}
+.card p{font-size:14.5px;color:var(--texto-2)}
+
+/* colores */
+.sw{border-radius:12px;overflow:hidden;border:1px solid var(--borde);background:var(--carbono)}
+.sw .chip{height:104px;display:flex;align-items:flex-end;padding:12px}
+.sw .meta{padding:14px 16px}
+.sw .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+.sw .hex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--texto-2);margin:3px 0 8px}
+.sw .use{font-size:12.5px;color:var(--texto-2);line-height:1.5}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;border:1px solid var(--borde);color:var(--texto-2);margin-top:8px}
+.badge.ok{color:var(--neon);border-color:rgba(0,255,102,.35)}
+.badge.no{color:var(--rojo);border-color:rgba(255,90,95,.35)}
+
+/* tipografia */
+.type-demo{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;padding:26px;margin-bottom:16px}
+.type-demo .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--neon);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.t-h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(30px,5vw,50px);line-height:1.05;letter-spacing:-.025em}
+.t-h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;line-height:1.2}
+.t-body{font-size:17px;line-height:1.75;max-width:62ch;color:var(--texto)}
+.t-meta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-2)}
+
+/* tono */
+.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.do,.dont{border-radius:12px;padding:20px;border:1px solid var(--borde);background:var(--carbono)}
+.do{border-left:3px solid var(--neon)}
+.dont{border-left:3px solid var(--rojo)}
+.do .tag{color:var(--neon)}.dont .tag{color:var(--rojo)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:10px}
+.vs p{font-size:15px}
+
+/* secciones editoriales */
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--borde);vertical-align:top}
+th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--texto-2);font-weight:400}
+td strong{font-family:'Space Grotesk',sans-serif}
+
+/* componentes */
+.btn{display:inline-block;background:var(--neon);color:var(--onix);font-family:'Space Grotesk',sans-serif;font-weight:700;padding:12px 22px;border-radius:8px;text-decoration:none;font-size:15px}
+.btn.ghost{background:transparent;color:var(--neon);border:1px solid var(--neon)}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+.p-bueno{background:rgba(0,255,102,.12);color:var(--neon);border:1px solid rgba(0,255,102,.3)}
+.p-malo{background:rgba(255,176,32,.12);color:var(--ambar);border:1px solid rgba(255,176,32,.3)}
+.p-feo{background:rgba(255,90,95,.12);color:var(--rojo);border:1px solid rgba(255,90,95,.3)}
+.art-card{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;padding:22px;transition:border-color .2s}
+.art-card:hover{border-color:var(--neon)}
+.art-card h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;line-height:1.25;margin:12px 0 8px}
+.art-card p{font-size:14.5px;color:var(--texto-2)}
+.art-card .foot{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--texto-2)}
+
+.logo-box{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;padding:34px;display:flex;align-items:center;justify-content:center;min-height:150px}
+.logo-a{font-family:Syne,sans-serif;font-weight:800;font-size:30px;letter-spacing:-.03em}
+.logo-a .m{color:var(--neon)}
+.logo-b{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600}
+.logo-b .cursor{color:var(--neon);animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.logo-c{font-family:Syne,sans-serif;font-weight:800;font-size:26px;border:2px solid var(--neon);padding:9px 16px;border-radius:6px}
+
+.rule{background:rgba(255,90,95,.07);border:1px solid rgba(255,90,95,.28);border-radius:10px;padding:16px 18px;font-size:14.5px;margin-top:20px}
+.rule b{color:var(--rojo)}
+footer{padding:48px 0 72px;color:var(--texto-2);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <div class="kicker">Kit de marca · v1.0 · Agosto 2026</div>
+  <h1>Modo Paranoia<span class="dot">_</span></h1>
+  <p class="slogan">Tecnología, futuro y <b>paranoia controlada</b>.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>Propósito y territorio</h2>
+  <p class="sub">Lo que el medio promete a quien lo lee, en una frase que cabe en la biografía de cualquier red social.</p>
+  <div class="grid g2">
+    <div class="card"><h4>Propósito</h4><p>Analizar la tecnología que viene <em>antes</em> de que cambie la forma en que vivimos, trabajamos o pensamos.</p></div>
+    <div class="card"><h4>Promesa al lector</h4><p>Sales entendiendo no solo qué pasó, sino qué te van a pedir que aceptes a cambio.</p></div>
+    <div class="card"><h4>Territorio</h4><p>Ciberseguridad, privacidad, impacto social de la IA, regulación y hardware raro — siempre aterrizado en América Latina.</p></div>
+    <div class="card"><h4>Antipúblico</h4><p>Quien busca specs, precios y reviews de compra. Eso ya lo hace Xataka mejor y con más gente.</p></div>
+  </div>
+  <div class="rule"><b>Regla de oro:</b> ninguna pieza se publica sin al menos un elemento que una IA no podría fabricar — un dato local verificado, una fuente primaria leída, una prueba propia o una opinión que te compromete.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Paleta</h2>
+  <p class="sub">Ajustada sobre la propuesta original. Los ratios de contraste están calculados contra el fondo Ónix según WCAG 2.1. Dos cambios importantes respecto al borrador inicial: el texto principal deja de ser blanco puro (reduce el halo en modo oscuro sin perder legibilidad) y las tarjetas ganan un borde propio, porque Carbono sobre Ónix solo alcanza 1,21:1 de separación — invisible sin ayuda.</p>
+  <div class="grid g4">
+    <div class="sw"><div class="chip" style="background:#0D0E12;border-bottom:1px solid var(--borde)"></div><div class="meta"><div class="name">Ónix</div><div class="hex">#0D0E12</div><div class="use">Fondo principal. Nunca negro puro: el #000 vibra en pantallas OLED.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#1F232B"></div><div class="meta"><div class="name">Carbono</div><div class="hex">#1F232B</div><div class="use">Tarjetas y contenedores. Siempre con borde #2C313C.</div></div></div>
+    <div class="sw"><div class="chip" style="background:#E8EAF0"></div><div class="meta"><div class="name">Niebla</div><div class="hex">#E8EAF0</div><div class="use">Texto principal.</div><span class="badge ok">16,04:1 · AAA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#A0A6B3"></div><div class="meta"><div class="name">Humo</div><div class="hex">#A0A6B3</div><div class="use">Texto secundario, fechas, autores.</div><span class="badge ok">7,90:1 · AAA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#00FF66"></div><div class="meta"><div class="name">Verde Terminal</div><div class="hex">#00FF66</div><div class="use">Acento único. Enlaces, botones, marcadores. Nunca en bloques grandes.</div><span class="badge ok">14,23:1 · AAA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#00B348"></div><div class="meta"><div class="name">Verde Profundo</div><div class="hex">#00B348</div><div class="use">Hover, estados activos, gráficos.</div><span class="badge ok">6,93:1 · AA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FFB020"></div><div class="meta"><div class="name">Ámbar</div><div class="hex">#FFB020</div><div class="use">Categoría "Lo malo", advertencias.</div><span class="badge ok">10,55:1 · AAA</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FF5A5F"></div><div class="meta"><div class="name">Alerta</div><div class="hex">#FF5A5F</div><div class="use">Categoría "Lo feo", errores.</div><span class="badge ok">6,32:1 · AA</span></div></div>
+  </div>
+  <div class="rule"><b>Nunca:</b> texto blanco sobre Verde Terminal — el contraste es 1,36:1 y es ilegible. El texto sobre verde es <em>siempre</em> Ónix #0D0E12 (14,23:1). Y el verde no supera el 10% de la superficie de ninguna pantalla: es un acento, no un fondo.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Tipografía</h2>
+  <p class="sub">Tres familias, todas de Google Fonts y libres. Syne para titulares con carácter, Space Grotesk para subtítulos e interfaz, Inter para lectura larga. JetBrains Mono aporta el guiño de terminal en metadatos y etiquetas.</p>
+  <div class="type-demo"><div class="lbl">Syne 800 · Titulares</div><div class="t-h1">Tu banco ya sabe cómo caminas</div></div>
+  <div class="type-demo"><div class="lbl">Space Grotesk 700 · Subtítulos e interfaz</div><div class="t-h2">Lo bueno, lo malo y lo feo de la biometría conductual</div></div>
+  <div class="type-demo"><div class="lbl">Inter 400 · Cuerpo · 17px / 1.75 / máx 62 caracteres</div><p class="t-body">La superintendencia lo aprobó en marzo y nadie escribió una línea al respecto. No hubo anuncio, no hubo rueda de prensa: hubo un anexo técnico de once páginas publicado un viernes. Lo leímos completo para que usted no tenga que hacerlo, y hay tres párrafos que deberían preocuparle.</p></div>
+  <div class="type-demo"><div class="lbl">JetBrains Mono · Metadatos y etiquetas</div><div class="t-meta">16 AGO 2026 · LETRA PEQUEÑA · 9 MIN DE LECTURA</div></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Voz</h2>
+  <p class="sub">La diferencia entre un medio con criterio y un blog enojado está en estos cuatro pares.</p>
+  <div class="vs">
+    <div class="do"><span class="tag">Sí</span><p>"El modelo funciona. El problema es quién decide cuándo se apaga."</p></div>
+    <div class="dont"><span class="tag">No</span><p>"En un panorama cada vez más complejo, la IA plantea desafíos sin precedentes."</p></div>
+    <div class="do"><span class="tag">Sí</span><p>"Leímos los 34.000 caracteres de los términos. Hay tres que importan."</p></div>
+    <div class="dont"><span class="tag">No</span><p>"Los expertos advierten sobre los riesgos potenciales de esta tecnología."</p></div>
+    <div class="do"><span class="tag">Sí</span><p>"Puede que me equivoque, y si me equivoco lo voy a escribir aquí."</p></div>
+    <div class="dont"><span class="tag">No</span><p>"Como siempre dijimos, esto era evidente desde el principio."</p></div>
+    <div class="do"><span class="tag">Sí</span><p>Sarcasmo dirigido a la promesa corporativa.</p></div>
+    <div class="dont"><span class="tag">No</span><p>Sarcasmo dirigido al lector que todavía no entiende el tema.</p></div>
+  </div>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><h4>Persona</h4><p>Primera persona del plural para el medio ("leímos", "probamos"), primera del singular para la opinión que compromete ("creo que esto es un error").</p></div>
+    <div class="card"><h4>Español</h4><p>Neutro latinoamericano con base colombiana. Sin voseo, sin "vosotros", sin anglicismos evitables. "Aprendizaje automático", no "machine learning", salvo que el término técnico sea el estándar real.</p></div>
+    <div class="card"><h4>Cierre</h4><p>Ninguna pieza termina en "solo el tiempo lo dirá". Se cierra con una posición, una pregunta concreta o algo que el lector puede hacer hoy.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Sistema editorial</h2>
+  <p class="sub">Cinco formatos recurrentes con color y etiqueta propios. Evita que el sitio se lea como una plantilla repetida — que es exactamente lo que las políticas de spam de Google penalizan.</p>
+  <table>
+    <tr><th>Sección</th><th>Ritmo</th><th>Qué es</th><th>Color</th></tr>
+    <tr><td><strong>Modo Autopsia</strong></td><td>Mensual</td><td>Post-mortem de un producto o promesa que fracasó. Nadie lo hace en español.</td><td>Alerta</td></tr>
+    <tr><td><strong>Lo bueno, lo malo y lo feo</strong></td><td>Quincenal</td><td>Formato insignia. Tres actos sobre una tecnología concreta.</td><td>Verde / Ámbar / Alerta</td></tr>
+    <tr><td><strong>Letra pequeña</strong></td><td>Mensual</td><td>Leemos los términos de servicio, el paper o la resolución que nadie lee.</td><td>Ámbar</td></tr>
+    <tr><td><strong>Modo Local</strong></td><td>Quincenal</td><td>Tendencia global aterrizada con datos y regulación de Colombia y LATAM.</td><td>Verde Terminal</td></tr>
+    <tr><td><strong>El Correo</strong></td><td>Semanal</td><td>Newsletter. Tres cosas que pasaron, una que importa, y por qué.</td><td>Verde Profundo</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Componentes</h2>
+  <p class="sub">Cómo se ve el sistema aplicado.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px">
+    <a href="#" class="btn">Suscribirme</a>
+    <a href="#" class="btn ghost">Leer el archivo</a>
+    <span class="pill p-bueno">Lo bueno</span>
+    <span class="pill p-malo">Lo malo</span>
+    <span class="pill p-feo">Lo feo</span>
+  </div>
+  <div class="grid g3">
+    <div class="art-card"><span class="pill p-malo">Letra pequeña</span><h3>Los tres párrafos del contrato de Nequi que nadie leyó</h3><p>Once páginas de anexo técnico publicadas un viernes. Aquí está lo que dicen.</p><div class="foot">16 AGO 2026 · 9 MIN</div></div>
+    <div class="art-card"><span class="pill p-feo">Modo Autopsia</span><h3>Humane AI Pin: anatomía de una promesa de 700 dólares</h3><p>Qué falló, quién lo sabía y por qué el siguiente lo va a repetir.</p><div class="foot">12 AGO 2026 · 14 MIN</div></div>
+    <div class="art-card"><span class="pill p-bueno">Modo Local</span><h3>La Ley 1581 no fue escrita para esto</h3><p>Reconocimiento facial en centros comerciales y una norma de 2012.</p><div class="foot">08 AGO 2026 · 11 MIN</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Logotipo</h2>
+  <p class="sub">Tres direcciones para explorar. Ninguna necesita ilustración: el nombre hace el trabajo y eso mantiene el costo en cero.</p>
+  <div class="grid g3">
+    <div class="logo-box"><div class="logo-a">MODO<span class="m">PARANOIA</span></div></div>
+    <div class="logo-box"><div class="logo-b">~/modo-paranoia <span class="cursor">█</span></div></div>
+    <div class="logo-box"><div class="logo-c">MP<span style="color:var(--neon)">_</span></div></div>
+  </div>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h4>A · Contraste de peso</h4><p>Una sola palabra compuesta, dos colores. Escala bien a favicon usando solo "MP".</p></div>
+    <div class="card"><h4>B · Prompt de terminal</h4><p>El cursor parpadeante refuerza "paranoia controlada". Fuerte en video y redes; frágil en tamaños pequeños.</p></div>
+    <div class="card"><h4>C · Monograma</h4><p>Para favicon, avatar y marca de agua. El guion bajo es el elemento recurrente del sistema.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  Kit de marca v1.0 · Contrastes verificados con WCAG 2.1 · Tipografías: Syne, Space Grotesk, Inter y JetBrains Mono (Google Fonts, licencia libre).<br>
+  El nombre y el dominio son la recomendación principal; la paleta, la tipografía, la voz y el sistema editorial funcionan igual con cualquiera de los nombres alternativos.
+</div></footer>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+import TarjetaArticulo from '../components/TarjetaArticulo.astro';
+import { obtenerArticulos } from '../lib/articulos';
+import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
+
+const articulos = await obtenerArticulos();
+const [portada, ...resto] = articulos;
+---
+
+<Base titulo={SITIO.nombre} descripcion={SITIO.descripcion}>
+  <section class="contenedor manifiesto">
+    <p class="mono">{SITIO.eslogan}</p>
+    <h1>
+      Analizamos la tecnología que viene <span class="apagado">antes de que cambie cómo
+      vivimos, trabajamos o pensamos.</span>
+    </h1>
+    <p class="entradilla medida">
+      Sin rodeos corporativos y sin pánico. Lo que la industria promete, lo que cuesta de
+      verdad y lo que significa desde acá.
+    </p>
+  </section>
+
+  {
+    articulos.length === 0 ? (
+      <section class="contenedor vacio">
+        <div class="tarjeta">
+          <h2>Todavía no hay nada publicado</h2>
+          <p>
+            Crea tu primer archivo en <code>src/content/articulos/</code> con
+            <code>borrador: false</code>, o entra al panel en <code>/admin</code>.
+          </p>
+        </div>
+      </section>
+    ) : (
+      <>
+        <section class="contenedor">
+          <h2 class="mono rotulo">Lo último</h2>
+          <TarjetaArticulo articulo={portada} grande />
+        </section>
+
+        {resto.length > 0 && (
+          <section class="contenedor">
+            <div class="rejilla">
+              {resto.map((articulo) => (
+                <TarjetaArticulo articulo={articulo} />
+              ))}
+            </div>
+          </section>
+        )}
+      </>
+    )
+  }
+
+  <section class="contenedor">
+    <h2 class="mono rotulo">Las secciones</h2>
+    <div class="rejilla">
+      {
+        CLAVES_SECCION.map((clave) => (
+          <a
+            class="tarjeta seccion"
+            href={`/seccion/${clave}`}
+            style={`--acento: var(${SECCIONES[clave].color})`}
+          >
+            <h3>{SECCIONES[clave].nombre}</h3>
+            <p>{SECCIONES[clave].descripcion}</p>
+            <span class="mono ritmo">{SECCIONES[clave].ritmo}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="contenedor">
+    <div class="tarjeta correo">
+      <h2>El Correo</h2>
+      <p class="medida">
+        Tres cosas que pasaron esta semana, una que importa, y por qué. Cuatro minutos de
+        lectura, los viernes. Sin relleno.
+      </p>
+      <!-- Fase 7: reemplazar por el formulario de Kit -->
+      <p class="mono pendiente">Formulario de suscripción pendiente (Fase 7)</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .manifiesto {
+    padding-block: clamp(3rem, 9vw, 6rem) 3rem;
+  }
+
+  .manifiesto h1 {
+    margin-block-start: 1.2rem;
+    max-width: 22ch;
+  }
+
+  .apagado {
+    color: var(--texto-2);
+  }
+
+  .entradilla {
+    margin-block-start: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--texto-2);
+  }
+
+  .rotulo {
+    margin-block: 3.5rem 1.2rem;
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .seccion {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .seccion h3 {
+    font-family: var(--f-ui);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--acento);
+  }
+
+  .seccion p {
+    color: var(--texto-2);
+    font-size: 0.92rem;
+    margin-block: 0.6rem 1rem;
+    flex: 1;
+  }
+
+  .ritmo {
+    font-size: 0.6875rem;
+  }
+
+  .correo {
+    margin-block-start: 3.5rem;
+    padding: 2rem;
+    border-color: color-mix(in srgb, var(--neon) 35%, var(--borde));
+  }
+
+  .correo h2 {
+    font-size: 1.6rem;
+  }
+
+  .correo p {
+    color: var(--texto-2);
+    margin-block-start: 0.7rem;
+  }
+
+  .pendiente {
+    color: var(--ambar);
+  }
+
+  .vacio {
+    padding-block: 2rem;
+  }
+</style>

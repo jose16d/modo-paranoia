@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------
+# Documentación interna — NO se publica.
+#
+# Estos archivos contienen el correo personal, rutas locales,
+# decisiones de negocio y notas operativas. El repositorio es
+# público: nada de esto tiene por qué estar ahí.
+#
+# Siguen funcionando igual en local: CLAUDE.md lo lee Claude Code
+# desde el disco, no desde git.
+# ---------------------------------------------------------------
+/BITACORA.md
+/CLAUDE.md
+/_privado/
+
+# Dependencias
+node_modules/
+
+# Resultado del build
+dist/
+.astro/
+
+# Variables de entorno — NUNCA se suben
+.env
+.env.*
+!.env.example
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

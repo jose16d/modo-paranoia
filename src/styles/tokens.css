@@ -1,0 +1,18 @@
+:root {
+  --onix: #0D0E12;
+  --carbono: #1F232B;
+  --borde: #2C313C;
+  --texto: #E8EAF0;
+  --texto-2: #A0A6B3;
+  --neon: #00FF66;
+  --neon-deep: #00B348;
+  --ambar: #FFB020;
+  --alerta: #FF5A5F;
+
+  --f-titular: 'Syne', sans-serif;
+  --f-ui: 'Space Grotesk', sans-serif;
+  --f-cuerpo: 'Inter Variable', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', monospace;
+
+  --medida: 62ch;
+}

@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import TarjetaArticulo from '../../components/TarjetaArticulo.astro';
+import { obtenerArticulos } from '../../lib/articulos';
+import { SECCIONES, CLAVES_SECCION } from '../../lib/secciones';
+
+export async function getStaticPaths() {
+  const articulos = await obtenerArticulos();
+
+  return CLAVES_SECCION.map((clave) => ({
+    params: { seccion: clave },
+    props: {
+      clave,
+      articulos: articulos.filter((a) => a.data.seccion === clave),
+    },
+  }));
+}
+
+const { clave, articulos } = Astro.props;
+const seccion = SECCIONES[clave];
+---
+
+<Base titulo={seccion.nombre} descripcion={seccion.descripcion}>
+  <div class="contenedor" style={`--acento: var(${seccion.color})`}>
+    <header class="encabezado">
+      <p class="mono">Sección · {seccion.ritmo}</p>
+      <h1>{seccion.nombre}</h1>
+      <p class="entradilla medida">{seccion.descripcion}</p>
+    </header>
+
+    {
+      articulos.length === 0 ? (
+        <div class="tarjeta">
+          <p>Todavía no hay piezas en esta sección.</p>
+        </div>
+      ) : (
+        <div class="rejilla">
+          {articulos.map((articulo) => (
+            <TarjetaArticulo articulo={articulo} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .encabezado {
+    padding-block: 3.5rem 2rem;
+    border-block-end: 1px solid var(--borde);
+    margin-block-end: 2.5rem;
+  }
+
+  .encabezado h1 {
+    margin-block-start: 0.8rem;
+    color: var(--acento);
+  }
+
+  .entradilla {
+    margin-block-start: 1rem;
+    font-size: 1.1rem;
+    color: var(--texto-2);
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.1rem;
+  }
+</style>

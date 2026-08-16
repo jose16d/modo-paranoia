@@ -1,0 +1,125 @@
+---
+/**
+ * Capa base de todas las páginas: <head>, fuentes, estilos y metadatos.
+ * Ninguna página escribe su propio <html>.
+ */
+import '@fontsource/syne/latin-700.css';
+import '@fontsource/syne/latin-800.css';
+import '@fontsource/space-grotesk/latin-400.css';
+import '@fontsource/space-grotesk/latin-500.css';
+import '@fontsource/space-grotesk/latin-700.css';
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-600.css';
+import '../styles/global.css';
+
+import CabeceraSitio from '../components/CabeceraSitio.astro';
+import PieSitio from '../components/PieSitio.astro';
+import { SITIO } from '../lib/secciones';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+  /** true en páginas de artículo: cambia el og:type y activa el JSON-LD de Article */
+  esArticulo?: boolean;
+  publicado?: Date;
+  actualizado?: Date;
+  /** Evita indexar páginas utilitarias como el 404 */
+  noIndexar?: boolean;
+}
+
+const {
+  titulo,
+  descripcion = SITIO.descripcion,
+  esArticulo = false,
+  publicado,
+  actualizado,
+  noIndexar = false,
+} = Astro.props;
+
+const tituloCompleto = titulo === SITIO.nombre ? titulo : `${titulo} · ${SITIO.nombre}`;
+const canonica = new URL(Astro.url.pathname, Astro.site ?? SITIO.url).href;
+
+const jsonLd = esArticulo
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: titulo,
+      description: descripcion,
+      datePublished: publicado?.toISOString(),
+      dateModified: (actualizado ?? publicado)?.toISOString(),
+      inLanguage: 'es',
+      mainEntityOfPage: canonica,
+      author: { '@type': 'Person', name: 'Jose', url: `${SITIO.url}/quien-escribe` },
+      publisher: { '@type': 'Organization', name: SITIO.nombre, url: SITIO.url },
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITIO.nombre,
+      description: SITIO.descripcion,
+      url: SITIO.url,
+      inLanguage: 'es',
+    };
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    {noIndexar && <meta name="robots" content="noindex" />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITIO.nombre} href="/rss.xml" />
+    <meta name="theme-color" content="#0D0E12" />
+
+    <meta property="og:type" content={esArticulo ? 'article' : 'website'} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:site_name" content={SITIO.nombre} />
+    <meta property="og:locale" content="es_CO" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </head>
+
+  <body>
+    <a href="#contenido" class="saltar">Saltar al contenido</a>
+    <CabeceraSitio />
+    <main id="contenido">
+      <slot />
+    </main>
+    <PieSitio />
+  </body>
+</html>
+
+<style>
+  .saltar {
+    /* fixed y no absolute: así el enlace también funciona con la página desplazada */
+    position: fixed;
+    inset-block-start: -3rem;
+    inset-inline-start: 1rem;
+    z-index: 50;
+    background: var(--neon);
+    color: var(--onix);
+    padding: 0.6rem 1rem;
+    border-radius: 0 0 8px 8px;
+    font-family: var(--f-ui);
+    font-weight: 700;
+    text-decoration: none;
+    transition: inset-block-start 0.15s ease;
+  }
+
+  .saltar:focus {
+    inset-block-start: 0;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>

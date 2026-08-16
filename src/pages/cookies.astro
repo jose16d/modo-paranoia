@@ -1,0 +1,76 @@
+---
+/*
+ * BORRADOR LEGAL — revisar antes de publicar.
+ *
+ * Describe el estado ACTUAL: sin cookies propias, sin publicidad.
+ * Cuando se active AdSense hay que reescribir esta página entera y añadir
+ * un gestor de consentimiento. Ver bloque marcado.
+ */
+import Pagina from '../layouts/Pagina.astro';
+import { SITIO } from '../lib/secciones';
+---
+
+<Pagina
+  titulo="Cookies"
+  descripcion="Qué cookies usa Modo Paranoia. Spoiler: prácticamente ninguna."
+  entradilla="La página de cookies más corta que vas a leer este año."
+  actualizado="16 de agosto de 2026"
+>
+  <h2>Este sitio no instala cookies propias</h2>
+
+  <p>
+    No hay cookies de sesión, ni de preferencias, ni de seguimiento. Tampoco hay píxeles de
+    redes sociales, ni Google Analytics, ni mapas de calor. Por eso no vas a encontrar aquí
+    el banner que te obliga a hacer clic antes de leer.
+  </p>
+
+  <h2>La analítica no usa cookies</h2>
+
+  <p>
+    Uso <strong>Cloudflare Web Analytics</strong>, que cuenta visitas sin cookies y sin
+    identificar al visitante. Sé cuántas personas leyeron un artículo; no sé quién eres, ni
+    qué leíste antes, ni a dónde fuiste después.
+  </p>
+
+  <h2>Excepciones honestas</h2>
+
+  <ul>
+    <li>
+      <strong>Cloudflare</strong> puede instalar una cookie técnica de seguridad
+      (<code>__cf_bm</code> u otra similar) para distinguir a personas de bots. Es necesaria
+      para que el sitio siga en pie y no sirve para seguirte.
+    </li>
+    <li>
+      <strong>El formulario de la newsletter</strong> lo sirve Kit, que puede instalar sus
+      propias cookies al interactuar con él. Solo ocurre si usas el formulario.
+    </li>
+    <li>
+      <strong>El panel de edición</strong> en <code>/admin</code> usa almacenamiento local
+      para mi propia sesión de trabajo. No es accesible para los lectores.
+    </li>
+  </ul>
+
+  <!-- ACTUALIZAR AL ACTIVAR ADSENSE: aquí va la tabla de cookies publicitarias,
+       la finalidad de cada una y el gestor de consentimiento. -->
+
+  <h2>Publicidad</h2>
+
+  <p>
+    Hoy no hay ninguna. Si algún día se activa publicidad programática, aparecerán cookies
+    de terceros y este sitio pedirá tu consentimiento antes de instalarlas. Esta página se
+    actualizará antes de que eso ocurra.
+  </p>
+
+  <h2>Cómo controlarlas de todos modos</h2>
+
+  <p>
+    Cualquier navegador permite bloquear o borrar cookies desde su configuración. Bloquear
+    las de este sitio no afecta a la lectura de ningún artículo.
+  </p>
+
+  <p>
+    Detalle completo del tratamiento de datos en la
+    <a href="/privacidad">política de privacidad</a>. Dudas, a
+    <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>.
+  </p>
+</Pagina>

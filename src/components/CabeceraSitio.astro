@@ -1,0 +1,86 @@
+---
+import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
+
+const rutaActual = Astro.url.pathname;
+---
+
+<header class="cabecera">
+  <div class="contenedor fila">
+    <a href="/" class="marca" aria-label={`${SITIO.nombre} — inicio`}>
+      <span class="marca__texto">MODO<span class="marca__acento">PARANOIA</span></span>
+    </a>
+
+    <nav aria-label="Secciones">
+      <ul class="nav">
+        {
+          CLAVES_SECCION.map((clave) => (
+            <li>
+              <a
+                href={`/seccion/${clave}`}
+                aria-current={rutaActual.startsWith(`/seccion/${clave}`) ? 'page' : undefined}
+              >
+                {SECCIONES[clave].nombre}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href="/quien-escribe">Quién escribe</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    border-block-end: 1px solid var(--borde);
+    background: color-mix(in srgb, var(--onix) 88%, transparent);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+  }
+
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    padding-block: 0.9rem;
+  }
+
+  .marca {
+    font-family: var(--f-titular);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    color: var(--texto);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .marca__acento {
+    color: var(--neon);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.15rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav a {
+    font-family: var(--f-ui);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--texto-2);
+    text-decoration: none;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    color: var(--neon);
+  }
+</style>

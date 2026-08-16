@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada" noIndexar>
+  <div class="contenedor caja">
+    <p class="mono">Error 404</p>
+    <h1>Esta página no existe<span class="acento">_</span></h1>
+    <p class="medida">
+      O nunca existió, o la movimos y no dejamos una redirección. Lo segundo sería culpa
+      nuestra.
+    </p>
+    <p class="acciones">
+      <a class="boton" href="/">Volver al inicio</a>
+      <a class="boton boton--fantasma" href="/rss.xml">Suscribirse por RSS</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .caja {
+    padding-block: clamp(4rem, 12vw, 8rem);
+  }
+
+  h1 {
+    margin-block: 1rem;
+  }
+
+  .acento {
+    color: var(--neon);
+  }
+
+  .caja > p {
+    color: var(--texto-2);
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-block-start: 2rem;
+  }
+</style>

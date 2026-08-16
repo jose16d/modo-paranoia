@@ -1,0 +1,32 @@
+---
+import Pagina from '../layouts/Pagina.astro';
+import { SITIO } from '../lib/secciones';
+---
+
+<Pagina
+  titulo="Contacto"
+  descripcion="Cómo escribir a Modo Paranoia: correcciones, propuestas, desacuerdos."
+  entradilla="Las correcciones son bienvenidas. Los desacuerdos argumentados, todavía más."
+>
+  <p>
+    Escribe a <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>. Leo todo, aunque no
+    siempre alcanzo a responder.
+  </p>
+
+  <h2>Qué sí es útil escribirme</h2>
+
+  <ul>
+    <li><strong>Correcciones.</strong> Si publiqué un dato equivocado, mándame la fuente correcta y lo arreglo con nota visible.</li>
+    <li><strong>Desacuerdos.</strong> Si crees que el análisis está mal, cuéntame por qué. Los mejores artículos han salido de discusiones.</li>
+    <li><strong>Pistas.</strong> Un documento, una resolución, unos términos de servicio que valga la pena leer con lupa.</li>
+    <li><strong>Propuestas de colaboración</strong> o de patrocinio de la newsletter.</li>
+  </ul>
+
+  <h2>Qué no</h2>
+
+  <ul>
+    <li>Notas de prensa genéricas.</li>
+    <li>Propuestas de «intercambio de enlaces» o publicación de artículos con backlinks.</li>
+    <li>Peticiones de retirar una pieza porque incomoda. Los errores se corrigen; las opiniones no se retiran.</li>
+  </ul>
+</Pagina>

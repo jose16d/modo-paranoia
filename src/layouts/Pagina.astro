@@ -1,0 +1,43 @@
+---
+/**
+ * Layout de las páginas institucionales: título, entradilla y prosa.
+ */
+import Base from './Base.astro';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+  entradilla?: string;
+  actualizado?: string;
+}
+
+const { titulo, descripcion, entradilla, actualizado } = Astro.props;
+---
+
+<Base titulo={titulo} descripcion={descripcion}>
+  <div class="contenedor">
+    <header class="encabezado">
+      <h1>{titulo}</h1>
+      {entradilla && <p class="entradilla medida">{entradilla}</p>}
+      {actualizado && <p class="mono">Actualizado el {actualizado}</p>}
+    </header>
+
+    <div class="prosa">
+      <slot />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .encabezado {
+    padding-block: 3.5rem 2rem;
+    border-block-end: 1px solid var(--borde);
+    margin-block-end: 2.5rem;
+  }
+
+  .entradilla {
+    font-size: 1.15rem;
+    color: var(--texto-2);
+    margin-block: 1rem 0.8rem;
+  }
+</style>

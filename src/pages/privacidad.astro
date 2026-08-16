@@ -1,0 +1,121 @@
+---
+/*
+ * BORRADOR LEGAL — revisar antes de publicar.
+ *
+ * Este texto describe con exactitud el estado técnico ACTUAL del sitio
+ * (analítica sin cookies, sin publicidad, newsletter en Kit).
+ * Hay que actualizarlo cuando se active AdSense: ahí sí entran cookies
+ * publicitarias y consentimiento previo. Ver el bloque marcado más abajo.
+ *
+ * Base normativa citada: Ley 1581 de 2012 y Decreto 1074 de 2015 (Colombia).
+ * Conviene que un abogado lo revise antes de monetizar.
+ */
+import Pagina from '../layouts/Pagina.astro';
+import { SITIO } from '../lib/secciones';
+---
+
+<Pagina
+  titulo="Política de privacidad"
+  descripcion="Qué datos recoge Modo Paranoia, para qué, y cómo ejercer tus derechos."
+  entradilla="Escribo sobre privacidad. Lo mínimo es que la de este sitio sea legible y corta."
+  actualizado="16 de agosto de 2026"
+>
+  <h2>Resumen en tres líneas</h2>
+
+  <ul>
+    <li>Este sitio no usa cookies de seguimiento ni perfila a sus lectores.</li>
+    <li>El único dato personal que puedo llegar a tener es tu correo, y solo si te suscribes voluntariamente.</li>
+    <li>Puedes darte de baja o pedir que borre tus datos cuando quieras, sin dar explicaciones.</li>
+  </ul>
+
+  <h2>Quién es el responsable</h2>
+
+  <p>
+    Jose, persona natural, responsable del tratamiento de los datos recogidos en
+    <strong>{SITIO.url}</strong>. Canal de contacto:
+    <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>.
+  </p>
+
+  <h2>Qué datos se recogen</h2>
+
+  <h3>Al leer</h3>
+
+  <p>
+    Uso <strong>Cloudflare Web Analytics</strong>, que mide visitas sin cookies, sin
+    huella digital del navegador y sin recoger direcciones IP completas. No permite
+    identificarte ni seguirte entre sitios. Por eso este sitio no necesita mostrarte un
+    banner de consentimiento.
+  </p>
+
+  <p>
+    Además, como todo servidor web, Cloudflare procesa datos técnicos de la conexión
+    (dirección IP, tipo de navegador) para poder entregarte la página y protegerla de
+    ataques. Es un tratamiento necesario para que el sitio funcione.
+  </p>
+
+  <h3>Al suscribirte a la newsletter</h3>
+
+  <p>
+    Si te suscribes a <em>El Correo</em>, recojo tu <strong>dirección de correo</strong> y,
+    si lo escribes, tu nombre. Los almacena <strong>Kit</strong> (kit.com), un proveedor
+    con servidores en Estados Unidos, que actúa como encargado del tratamiento.
+  </p>
+
+  <p>
+    Uso esos datos únicamente para enviarte la newsletter y, de forma agregada, para saber
+    cuántas personas abren cada edición. <strong>No vendo, cedo ni intercambio la lista</strong>
+    con nadie, bajo ninguna circunstancia.
+  </p>
+
+  <h3>Al escribirme</h3>
+
+  <p>
+    Los correos que me envías llegan a mi buzón y se conservan mientras sean útiles para
+    responderte o corregir una pieza.
+  </p>
+
+  <h2>Publicidad</h2>
+
+  <!-- ACTUALIZAR AL ACTIVAR ADSENSE: cookies publicitarias, consentimiento previo,
+       enlace a la política de socios publicitarios de Google. -->
+  <p>
+    A día de hoy este sitio <strong>no muestra publicidad</strong> y no tiene ningún
+    rastreador publicitario. Si eso cambia, esta página se actualizará antes de que ocurra,
+    con la fecha de cambio visible.
+  </p>
+
+  <h2>Tus derechos</h2>
+
+  <p>
+    De acuerdo con la Ley 1581 de 2012 de Colombia, puedes en cualquier momento
+    <strong>conocer, actualizar, rectificar y suprimir</strong> tus datos, revocar la
+    autorización que diste, y solicitar prueba de esa autorización.
+  </p>
+
+  <p>
+    Para ejercerlos basta con escribir a
+    <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>. Respondo en un plazo máximo de
+    quince días hábiles. Para darte de baja de la newsletter también sirve el enlace que
+    aparece al final de cada envío: un clic, sin preguntas.
+  </p>
+
+  <p>
+    Si consideras que no atendí tu solicitud, puedes acudir a la Superintendencia de
+    Industria y Comercio.
+  </p>
+
+  <h2>Cuánto tiempo se conservan</h2>
+
+  <p>
+    Tu correo se conserva mientras sigas suscrito. Cuando te das de baja, tu registro se
+    elimina de la lista. Los datos de analítica son agregados y no se asocian a personas.
+  </p>
+
+  <h2>Cambios</h2>
+
+  <p>
+    Cualquier modificación de esta política se publicará aquí con la fecha de actualización
+    visible al inicio de la página. Si el cambio afecta al uso de tus datos, lo avisaré por
+    la newsletter.
+  </p>
+</Pagina>
