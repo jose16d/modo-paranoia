@@ -24,6 +24,9 @@ dist/
 .env.*
 !.env.example
 
+# Ajustes locales de herramientas — pueden contener rutas y permisos de esta máquina
+.claude/settings.local.json
+
 # Sistema operativo
 .DS_Store
 Thumbs.db

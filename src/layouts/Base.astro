@@ -26,6 +26,8 @@ interface Props {
   actualizado?: Date;
   /** Evita indexar páginas utilitarias como el 404 */
   noIndexar?: boolean;
+  /** Ruta absoluta del sitio, p. ej. `/og.png`. Sin ella se usa la imagen de marca. */
+  imagen?: string;
 }
 
 const {
@@ -35,10 +37,27 @@ const {
   publicado,
   actualizado,
   noIndexar = false,
+  imagen = '/og.png',
 } = Astro.props;
 
 const tituloCompleto = titulo === SITIO.nombre ? titulo : `${titulo} · ${SITIO.nombre}`;
-const canonica = new URL(Astro.url.pathname, Astro.site ?? SITIO.url).href;
+const base = Astro.site ?? SITIO.url;
+
+/**
+ * Con `build.format: 'file'`, al compilar `Astro.url.pathname` termina en `.html`
+ * (`/contacto.html`, `/index.html`), pero Cloudflare Pages sirve esas páginas en
+ * `/contacto` y `/`, que es lo que apuntan todos los enlaces internos. Sin esta
+ * normalización, la canónica declararía una dirección distinta de la enlazada y
+ * partiría en dos la señal que recibe Google.
+ */
+function rutaCanonica(ruta: string): string {
+  if (ruta === '/index.html') return '/';
+  return ruta.replace(/\.html$/, '');
+}
+
+const canonica = new URL(rutaCanonica(Astro.url.pathname), base).href;
+// Las redes sociales exigen URL absoluta en og:image; una ruta relativa se ignora.
+const imagenAbsoluta = new URL(imagen, base).href;
 
 const jsonLd = esArticulo
   ? {
@@ -73,7 +92,11 @@ const jsonLd = esArticulo
     <link rel="canonical" href={canonica} />
     {noIndexar && <meta name="robots" content="noindex" />}
 
+    {/* El .ico es solo para navegadores viejos; los actuales prefieren el SVG. */}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/rss+xml" title={SITIO.nombre} href="/rss.xml" />
     <meta name="theme-color" content="#0D0E12" />
 
@@ -83,7 +106,12 @@ const jsonLd = esArticulo
     <meta property="og:url" content={canonica} />
     <meta property="og:site_name" content={SITIO.nombre} />
     <meta property="og:locale" content="es_CO" />
+    <meta property="og:image" content={imagenAbsoluta} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITIO.nombre} — ${SITIO.eslogan}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imagenAbsoluta} />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>

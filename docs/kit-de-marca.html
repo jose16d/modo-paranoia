@@ -96,13 +96,40 @@ td strong{font-family:'Space Grotesk',sans-serif}
 
 .rule{background:rgba(255,90,95,.07);border:1px solid rgba(255,90,95,.28);border-radius:10px;padding:16px 18px;font-size:14.5px;margin-top:20px}
 .rule b{color:var(--rojo)}
+.note{background:rgba(0,255,102,.06);border:1px solid rgba(0,255,102,.25);border-radius:10px;padding:16px 18px;font-size:14.5px;margin-top:20px}
+.note b{color:var(--neon)}
 footer{padding:48px 0 72px;color:var(--texto-2);font-size:13.5px}
+
+/* iconografia */
+.iconos{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.ico{background:var(--carbono);border:1px solid var(--borde);border-radius:10px;padding:16px 8px 11px;text-align:center}
+.ico img{width:26px;height:26px;display:block;margin:0 auto 10px}
+.ico span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--texto-2);word-break:break-all;line-height:1.4}
+.secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.sec{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;padding:20px;text-align:center}
+.sec img{width:44px;height:44px;display:block;margin:0 auto 12px}
+.sec b{font-family:'Space Grotesk',sans-serif;font-size:14px;display:block}
+.sec span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--texto-2)}
+
+/* archivos de marca */
+.pieza{background:var(--carbono);border:1px solid var(--borde);border-radius:12px;overflow:hidden}
+.pieza .lienzo{display:flex;align-items:center;justify-content:center;padding:26px;min-height:120px;background:var(--onix)}
+.pieza .lienzo.claro{background:#E8EAF0}
+.pieza .lienzo img{max-width:100%;height:auto}
+.pieza .ruta{padding:12px 16px;border-top:1px solid var(--borde);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--texto-2);word-break:break-all}
+.pieza .ruta em{display:block;font-style:normal;font-family:Inter,sans-serif;font-size:12.5px;color:var(--texto);margin-bottom:4px}
+
+/* patrones */
+.pats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.pat{border:1px solid var(--borde);border-radius:12px;overflow:hidden}
+.pat .muestra{height:112px}
+.pat .ruta{padding:11px 14px;border-top:1px solid var(--borde);background:var(--carbono);font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--texto-2)}
 </style>
 </head>
 <body>
 
 <header class="hero"><div class="wrap">
-  <div class="kicker">Kit de marca · v1.0 · Agosto 2026</div>
+  <div class="kicker">Kit de marca · v1.1 · Agosto 2026</div>
   <h1>Modo Paranoia<span class="dot">_</span></h1>
   <p class="slogan">Tecnología, futuro y <b>paranoia controlada</b>.</p>
 </div></header>
@@ -196,22 +223,134 @@ footer{padding:48px 0 72px;color:var(--texto-2);font-size:13.5px}
 
 <section><div class="wrap">
   <h2>Logotipo</h2>
-  <p class="sub">Tres direcciones para explorar. Ninguna necesita ilustración: el nombre hace el trabajo y eso mantiene el costo en cero.</p>
-  <div class="grid g3">
-    <div class="logo-box"><div class="logo-a">MODO<span class="m">PARANOIA</span></div></div>
-    <div class="logo-box"><div class="logo-b">~/modo-paranoia <span class="cursor">█</span></div></div>
-    <div class="logo-box"><div class="logo-c">MP<span style="color:var(--neon)">_</span></div></div>
+  <p class="sub">Archivos reales, no maquetas. Todos viven en <code class="mono">docs/assets/logo/</code> y son SVG con el texto ya convertido a trazos: no dependen de que Syne esté instalada en la máquina que los dibuje, que es exactamente lo que falla cuando un logotipo lleva una etiqueta <code class="mono">&lt;text&gt;</code> dentro.</p>
+
+  <div class="grid g2">
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/logo/logo-principal.svg" alt="Modo Paranoia — logotipo principal"></div>
+      <div class="ruta"><em>A · Principal, sobre fondo oscuro</em>assets/logo/logo-principal.svg</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo claro"><img src="assets/logo/logo-principal-fondo-claro.svg" alt="Modo Paranoia — logotipo sobre fondo claro"></div>
+      <div class="ruta"><em>A · Principal, sobre fondo claro</em>assets/logo/logo-principal-fondo-claro.svg — el acento pasa a Verde Profundo <span style="color:var(--neon-deep)">#00B348</span>, porque el neón sobre blanco baja a 1,3:1</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/logo/logo-horizontal.svg" alt="Modo Paranoia con el eslogan"></div>
+      <div class="ruta"><em>A · Con eslogan</em>assets/logo/logo-horizontal.svg — para cabeceras anchas y firmas de correo</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/logo/logo-terminal.svg" alt="~/modo-paranoia"></div>
+      <div class="ruta"><em>B · Prompt de terminal</em>assets/logo/logo-terminal.svg — fuerte en video y redes, frágil en tamaños pequeños</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/logo/monograma.svg" alt="Monograma MP" style="width:120px"></div>
+      <div class="ruta"><em>C · Monograma</em>assets/logo/monograma.svg — avatar, marca de agua, sello</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/logo/favicon.svg" alt="Isotipo: chevron y cursor" style="width:96px"></div>
+      <div class="ruta"><em>D · Isotipo — favicon</em>assets/logo/favicon.svg</div>
+    </div>
   </div>
-  <div class="grid g3" style="margin-top:16px">
-    <div class="card"><h4>A · Contraste de peso</h4><p>Una sola palabra compuesta, dos colores. Escala bien a favicon usando solo "MP".</p></div>
-    <div class="card"><h4>B · Prompt de terminal</h4><p>El cursor parpadeante refuerza "paranoia controlada". Fuerte en video y redes; frágil en tamaños pequeños.</p></div>
-    <div class="card"><h4>C · Monograma</h4><p>Para favicon, avatar y marca de agua. El guion bajo es el elemento recurrente del sistema.</p></div>
+
+  <div class="note"><b>Por qué el favicon no lleva «MP»:</b> a 16 píxeles dos letras de Syne son una mancha. El chevron con el cursor es geometría pura, se reconoce a cualquier tamaño, no depende de ninguna fuente y repite el <em>prompt</em> que ya usa el resto del sistema. Ónix sobre Verde Terminal: 14,23:1.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Iconografía</h2>
+  <p class="sub">Treinta y ocho iconos de sistema, dibujados con las mismas reglas para que ninguno desentone. En el sitio no se cargan como imágenes: se insertan dentro del HTML al compilar, así heredan el color del texto y no cuestan una petición cada uno.</p>
+
+  <div class="grid g3" style="margin-bottom:26px">
+    <div class="card"><h4>Lienzo y trazo</h4><p><code class="mono">viewBox="0 0 24 24"</code>, trazo de <code class="mono">1.5</code>, sin relleno. Los iconos de sección usan lienzo de 48 y trazo 2.</p></div>
+    <div class="card"><h4>Remates</h4><p><code class="mono">stroke-linecap="square"</code> y <code class="mono">stroke-linejoin="miter"</code>. Las esquinas son duras a propósito: el redondeo suaviza y esta marca no es suave.</p></div>
+    <div class="card"><h4>Color</h4><p>El trazo es <code class="mono">currentColor</code>. El archivo suelto lleva además <code class="mono">color="#E8EAF0"</code> para verse fuera del sitio; dentro manda el contexto.</p></div>
+  </div>
+
+  <div class="iconos">
+    <div class="ico"><img src="assets/iconos/alerta.svg" alt=""><span>alerta</span></div>
+    <div class="ico"><img src="assets/iconos/archivo-cajas.svg" alt=""><span>archivo-cajas</span></div>
+    <div class="ico"><img src="assets/iconos/autor.svg" alt=""><span>autor</span></div>
+    <div class="ico"><img src="assets/iconos/balanza.svg" alt=""><span>balanza</span></div>
+    <div class="ico"><img src="assets/iconos/buscar.svg" alt=""><span>buscar</span></div>
+    <div class="ico"><img src="assets/iconos/calendario.svg" alt=""><span>calendario</span></div>
+    <div class="ico"><img src="assets/iconos/candado.svg" alt=""><span>candado</span></div>
+    <div class="ico"><img src="assets/iconos/cerebro-ia.svg" alt=""><span>cerebro-ia</span></div>
+    <div class="ico"><img src="assets/iconos/cerrar.svg" alt=""><span>cerrar</span></div>
+    <div class="ico"><img src="assets/iconos/chevron-abajo.svg" alt=""><span>chevron-abajo</span></div>
+    <div class="ico"><img src="assets/iconos/chip.svg" alt=""><span>chip</span></div>
+    <div class="ico"><img src="assets/iconos/cita.svg" alt=""><span>cita</span></div>
+    <div class="ico"><img src="assets/iconos/compartir.svg" alt=""><span>compartir</span></div>
+    <div class="ico"><img src="assets/iconos/copiar.svg" alt=""><span>copiar</span></div>
+    <div class="ico"><img src="assets/iconos/correo.svg" alt=""><span>correo</span></div>
+    <div class="ico"><img src="assets/iconos/descargar.svg" alt=""><span>descargar</span></div>
+    <div class="ico"><img src="assets/iconos/documento.svg" alt=""><span>documento</span></div>
+    <div class="ico"><img src="assets/iconos/enlace-externo.svg" alt=""><span>enlace-externo</span></div>
+    <div class="ico"><img src="assets/iconos/escudo.svg" alt=""><span>escudo</span></div>
+    <div class="ico"><img src="assets/iconos/etiqueta.svg" alt=""><span>etiqueta</span></div>
+    <div class="ico"><img src="assets/iconos/filtro.svg" alt=""><span>filtro</span></div>
+    <div class="ico"><img src="assets/iconos/flecha-arriba.svg" alt=""><span>flecha-arriba</span></div>
+    <div class="ico"><img src="assets/iconos/flecha-derecha.svg" alt=""><span>flecha-derecha</span></div>
+    <div class="ico"><img src="assets/iconos/flecha-izquierda.svg" alt=""><span>flecha-izquierda</span></div>
+    <div class="ico"><img src="assets/iconos/grafico.svg" alt=""><span>grafico</span></div>
+    <div class="ico"><img src="assets/iconos/luna.svg" alt=""><span>luna</span></div>
+    <div class="ico"><img src="assets/iconos/lupa-documento.svg" alt=""><span>lupa-documento</span></div>
+    <div class="ico"><img src="assets/iconos/mapa-latam.svg" alt=""><span>mapa-latam</span></div>
+    <div class="ico"><img src="assets/iconos/marcador.svg" alt=""><span>marcador</span></div>
+    <div class="ico"><img src="assets/iconos/mas.svg" alt=""><span>mas</span></div>
+    <div class="ico"><img src="assets/iconos/menos.svg" alt=""><span>menos</span></div>
+    <div class="ico"><img src="assets/iconos/menu.svg" alt=""><span>menu</span></div>
+    <div class="ico"><img src="assets/iconos/ojo.svg" alt=""><span>ojo</span></div>
+    <div class="ico"><img src="assets/iconos/ojo-tachado.svg" alt=""><span>ojo-tachado</span></div>
+    <div class="ico"><img src="assets/iconos/reloj.svg" alt=""><span>reloj</span></div>
+    <div class="ico"><img src="assets/iconos/rss.svg" alt=""><span>rss</span></div>
+    <div class="ico"><img src="assets/iconos/sol.svg" alt=""><span>sol</span></div>
+    <div class="ico"><img src="assets/iconos/terminal.svg" alt=""><span>terminal</span></div>
+  </div>
+
+  <h3 style="font-size:20px;margin:34px 0 10px">Iconos de sección</h3>
+  <p class="sub" style="margin-bottom:20px">Uno por formato editorial, con el color de su sección escrito dentro para que el archivo suelto se vea bien. Dentro del sitio ese color se sustituye por el del contexto — salvo los colores puestos en elementos internos, que son deliberados.</p>
+  <div class="secs">
+    <div class="sec"><img src="assets/secciones/lo-bueno-lo-malo-lo-feo.svg" alt=""><b>Lo bueno, lo malo y lo feo</b><span>Verde / Ámbar / Alerta</span></div>
+    <div class="sec"><img src="assets/secciones/modo-autopsia.svg" alt=""><b>Modo Autopsia</b><span>Alerta</span></div>
+    <div class="sec"><img src="assets/secciones/letra-pequena.svg" alt=""><b>Letra pequeña</b><span>Ámbar</span></div>
+    <div class="sec"><img src="assets/secciones/modo-local.svg" alt=""><b>Modo Local</b><span>Verde Terminal</span></div>
+    <div class="sec"><img src="assets/secciones/el-correo.svg" alt=""><b>El Correo</b><span>Verde Profundo</span></div>
+  </div>
+
+  <div class="note"><b>Las tres barras no se recolorean.</b> El icono de «Lo bueno, lo malo y lo feo» es verde, ámbar y alerta a la vez: esa tricromía <em>es</em> el icono. El sitio solo sustituye el color del elemento raíz, nunca los de los elementos internos.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Patrones</h2>
+  <p class="sub">Cuatro texturas de 8×8 píxeles que se repiten. Sirven para separar bloques sin recurrir al verde, que tiene el cupo del 10% de la pantalla y se gasta rápido.</p>
+  <div class="pats">
+    <div class="pat"><div class="muestra" style="background:url(assets/patrones/scanlines.svg)"></div><div class="ruta">assets/patrones/scanlines.svg</div></div>
+    <div class="pat"><div class="muestra" style="background:url(assets/patrones/grid-terminal.svg)"></div><div class="ruta">assets/patrones/grid-terminal.svg</div></div>
+    <div class="pat"><div class="muestra" style="background:url(assets/patrones/ruido-diagonal.svg)"></div><div class="ruta">assets/patrones/ruido-diagonal.svg</div></div>
+    <div class="pat"><div class="muestra" style="background:url(assets/patrones/guion-repetido.svg)"></div><div class="ruta">assets/patrones/guion-repetido.svg</div></div>
   </div>
 </div></section>
 
+<section><div class="wrap">
+  <h2>Redes y compartidos</h2>
+  <p class="sub">Lo que se ve cuando alguien pega un enlace del sitio en WhatsApp, en X o en LinkedIn. Va en PNG y no en SVG porque ninguna de esas plataformas acepta SVG como <code class="mono">og:image</code>: el SVG queda en el kit como fuente editable.</p>
+  <div class="grid g2">
+    <div class="pieza">
+      <div class="lienzo" style="padding:0"><img src="../public/og.png" alt="Imagen de compartido de Modo Paranoia"></div>
+      <div class="ruta"><em>Open Graph · 1200×630</em>public/og.png — declarada en <code class="mono">src/layouts/Base.astro</code>. Fuente: assets/social/og-image-1200x630.svg</div>
+    </div>
+    <div class="pieza">
+      <div class="lienzo"><img src="assets/social/avatar-1024.png" alt="Avatar de Modo Paranoia" style="width:200px"></div>
+      <div class="ruta"><em>Avatar · 1024×1024</em>assets/social/avatar-1024.png — a sangre y sin esquinas redondeadas, porque cada red recorta a su manera</div>
+    </div>
+  </div>
+
+  <div class="note"><b>Cómo se regeneran:</b> los archivos con texto se producen con un script que convierte la Syne real a trazos, no se editan a mano. El procedimiento está en la BITÁCORA; el ancho de la marca es <code class="mono">14,85 × el tamaño de fuente</code>, medido, no estimado.</div>
+</div></section>
+
 <footer><div class="wrap">
-  Kit de marca v1.0 · Contrastes verificados con WCAG 2.1 · Tipografías: Syne, Space Grotesk, Inter y JetBrains Mono (Google Fonts, licencia libre).<br>
-  El nombre y el dominio son la recomendación principal; la paleta, la tipografía, la voz y el sistema editorial funcionan igual con cualquiera de los nombres alternativos.
+  Kit de marca v1.1 · Contrastes verificados con WCAG 2.1 · Tipografías: Syne, Space Grotesk, Inter y JetBrains Mono (SIL Open Font License).<br>
+  Los archivos de este kit viven en <code class="mono">docs/assets/</code> y son la única fuente: el sitio los lee de ahí al compilar, no tiene copias propias.<br>
+  Esta página carga las tipografías por CDN porque es documentación y no se despliega. El sitio nunca lo hace: usa <code class="mono">@fontsource</code> en local.
 </div></footer>
 
 </body>

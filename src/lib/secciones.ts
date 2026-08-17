@@ -2,6 +2,11 @@
  * Metadatos de las secciones editoriales.
  * La clave debe coincidir exactamente con el enum `secciones` de src/content.config.ts.
  * Si añades una sección, hay que tocar los dos archivos: el esquema valida, esto presenta.
+ *
+ * Iconos: cada clave necesita un SVG homónimo en `docs/assets/secciones/`
+ * (`modo-autopsia` → `docs/assets/secciones/modo-autopsia.svg`). No hay un campo
+ * `icono` porque sería repetir la clave; la convención se verifica sola, ya que
+ * `astro build` falla si el archivo no existe. Ver src/lib/iconos.ts.
  */
 export interface Seccion {
   nombre: string;

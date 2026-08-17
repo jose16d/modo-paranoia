@@ -140,7 +140,13 @@ code, kbd, pre, samp {
  * Blanco sobre neón da 1,36:1 y es ilegible.
  */
 .etiqueta {
-  display: inline-block;
+  /* inline-flex y no inline-block: la etiqueta lleva el icono de la sección al lado */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  /* Dentro de la tarjeta, que es un flex en columna, sin esto la píldora se estira
+     de borde a borde y deja de leerse como etiqueta */
+  align-self: flex-start;
   font-family: var(--f-mono);
   font-size: 0.6875rem;
   font-weight: 600;
@@ -155,7 +161,9 @@ code, kbd, pre, samp {
 }
 
 .boton {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   background: var(--neon);
   color: var(--onix);
   font-family: var(--f-ui);

@@ -1,18 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
 ---
 
 <Base titulo="Página no encontrada" noIndexar>
   <div class="contenedor caja">
-    <p class="mono">Error 404</p>
+    <p class="mono error">
+      <Icono nombre="terminal" tam="1.15em" />
+      Error 404
+    </p>
     <h1>Esta página no existe<span class="acento">_</span></h1>
     <p class="medida">
       O nunca existió, o la movimos y no dejamos una redirección. Lo segundo sería culpa
       nuestra.
     </p>
     <p class="acciones">
-      <a class="boton" href="/">Volver al inicio</a>
-      <a class="boton boton--fantasma" href="/rss.xml">Suscribirse por RSS</a>
+      <a class="boton" href="/">
+        <Icono nombre="flecha-izquierda" tam="1.05em" />
+        Volver al inicio
+      </a>
+      <a class="boton boton--fantasma" href="/rss.xml">
+        <Icono nombre="rss" tam="1.05em" />
+        Suscribirse por RSS
+      </a>
     </p>
   </div>
 </Base>
@@ -20,6 +30,13 @@ import Base from '../layouts/Base.astro';
 <style>
   .caja {
     padding-block: clamp(4rem, 12vw, 8rem);
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--alerta);
   }
 
   h1 {

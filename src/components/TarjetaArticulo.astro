@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icono from './Icono.astro';
 import { SECCIONES } from '../lib/secciones';
 
 interface Props {
@@ -19,7 +20,10 @@ const fecha = articulo.data.fecha.toLocaleDateString('es-CO', {
 ---
 
 <article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
-  <span class="etiqueta">{seccion.nombre}</span>
+  <span class="etiqueta">
+    <Icono nombre={articulo.data.seccion} familia="secciones" tam="0.95em" />
+    {seccion.nombre}
+  </span>
 
   <h3 class="titulo">
     <a href={`/articulos/${articulo.id}`}>{articulo.data.titulo}</a>
@@ -28,8 +32,15 @@ const fecha = articulo.data.fecha.toLocaleDateString('es-CO', {
   <p class="bajada">{articulo.data.bajada}</p>
 
   <p class="mono pie">
+    <Icono nombre="calendario" tam="0.9em" />
     <time datetime={articulo.data.fecha.toISOString()}>{fecha}</time>
-    {articulo.data.borrador && <span class="borrador">· Borrador</span>}
+    {
+      articulo.data.borrador && (
+        <span class="borrador">
+          <Icono nombre="alerta" tam="0.9em" /> Borrador
+        </span>
+      )
+    }
   </p>
 </article>
 
@@ -79,10 +90,18 @@ const fecha = articulo.data.fecha.toLocaleDateString('es-CO', {
   }
 
   .pie {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4em;
     margin-block-start: 1rem;
   }
 
   .borrador {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    margin-inline-start: 0.4em;
     color: var(--ambar);
   }
 </style>

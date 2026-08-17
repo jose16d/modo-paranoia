@@ -1,0 +1,27 @@
+# Cabeceras HTTP de Cloudflare Pages.
+#
+# Este archivo no se sirve: Pages lo lee al desplegar y lo aplica a las respuestas.
+# Las reglas se evalúan de la más general a la más específica.
+
+/*
+  # Impide que el navegador adivine el tipo de un archivo y lo ejecute como otra cosa
+  X-Content-Type-Options: nosniff
+  # El sitio no se puede incrustar en un iframe ajeno
+  X-Frame-Options: DENY
+  # Al salir hacia otro dominio solo se envía el origen, nunca la URL completa
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Un medio de análisis crítico no necesita cámara, micrófono ni ubicación
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  #
+  # CSP: el sitio es estático y no carga nada de terceros. `unsafe-inline` en estilos
+  # es necesario porque Astro incrusta las hojas pequeñas en el HTML; los scripts NO
+  # lo llevan, así que un script inyectado no se ejecuta.
+  #
+  # FASE 6: Sveltia CMS carga su propio JavaScript en /admin. Cuando llegue ese paso
+  # hay que añadir una regla específica para `/admin/*` en vez de aflojar esta.
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+
+# Astro pone una huella en el nombre de cada recurso compilado: si cambia el
+# contenido, cambia el nombre. Por eso se pueden cachear para siempre.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

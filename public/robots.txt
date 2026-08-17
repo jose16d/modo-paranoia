@@ -1,0 +1,8 @@
+# Modo Paranoia — https://modoparanoia.com
+#
+# Todo el sitio es rastreable. Hasta la Fase 8 no hay sitemap: declarar aquí uno
+# que devuelve 404 es peor que no declarar ninguno, así que la línea `Sitemap:`
+# se añade cuando el archivo exista de verdad.
+
+User-agent: *
+Allow: /

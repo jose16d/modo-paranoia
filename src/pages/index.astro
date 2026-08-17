@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
 import TarjetaArticulo from '../components/TarjetaArticulo.astro';
 import { obtenerArticulos } from '../lib/articulos';
 import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
@@ -62,9 +63,13 @@ const [portada, ...resto] = articulos;
             href={`/seccion/${clave}`}
             style={`--acento: var(${SECCIONES[clave].color})`}
           >
+            <Icono nombre={clave} familia="secciones" tam={30} clase="glifo" />
             <h3>{SECCIONES[clave].nombre}</h3>
             <p>{SECCIONES[clave].descripcion}</p>
-            <span class="mono ritmo">{SECCIONES[clave].ritmo}</span>
+            <span class="mono ritmo">
+              <Icono nombre="reloj" tam="0.95em" />
+              {SECCIONES[clave].ritmo}
+            </span>
           </a>
         ))
       }
@@ -73,7 +78,10 @@ const [portada, ...resto] = articulos;
 
   <section class="contenedor">
     <div class="tarjeta correo">
-      <h2>El Correo</h2>
+      <h2>
+        <Icono nombre="el-correo" familia="secciones" tam="0.9em" />
+        El Correo
+      </h2>
       <p class="medida">
         Tres cosas que pasaron esta semana, una que importa, y por qué. Cuatro minutos de
         lectura, los viernes. Sin relleno.
@@ -121,6 +129,15 @@ const [portada, ...resto] = articulos;
     flex-direction: column;
   }
 
+  /*
+   * :global() es necesario aquí: la clase viaja como prop hasta <Icono>, así que el
+   * compilador de Astro no puede añadirle el hash de ámbito de esta página.
+   */
+  .seccion :global(.glifo) {
+    color: var(--acento);
+    margin-block-end: 0.9rem;
+  }
+
   .seccion h3 {
     font-family: var(--f-ui);
     font-weight: 700;
@@ -136,6 +153,9 @@ const [portada, ...resto] = articulos;
   }
 
   .ritmo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
     font-size: 0.6875rem;
   }
 
@@ -146,7 +166,11 @@ const [portada, ...resto] = articulos;
   }
 
   .correo h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
     font-size: 1.6rem;
+    color: var(--neon);
   }
 
   .correo p {

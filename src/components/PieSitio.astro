@@ -1,14 +1,16 @@
 ---
+import Icono from './Icono.astro';
 import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
 
 const anio = new Date().getFullYear();
 
+/** `icono` es el nombre del archivo en docs/assets/iconos/, sin extensión. */
 const legales = [
-  { href: '/metodologia', texto: 'Metodología' },
-  { href: '/politica-editorial', texto: 'Política editorial' },
-  { href: '/privacidad', texto: 'Privacidad' },
-  { href: '/cookies', texto: 'Cookies' },
-  { href: '/contacto', texto: 'Contacto' },
+  { href: '/metodologia', texto: 'Metodología', icono: 'lupa-documento' },
+  { href: '/politica-editorial', texto: 'Política editorial', icono: 'balanza' },
+  { href: '/privacidad', texto: 'Privacidad', icono: 'escudo' },
+  { href: '/cookies', texto: 'Cookies', icono: 'ojo' },
+  { href: '/contacto', texto: 'Contacto', icono: 'correo' },
 ];
 ---
 
@@ -25,7 +27,10 @@ const legales = [
         {
           CLAVES_SECCION.map((clave) => (
             <li>
-              <a href={`/seccion/${clave}`}>{SECCIONES[clave].nombre}</a>
+              <a href={`/seccion/${clave}`}>
+                <Icono nombre={clave} familia="secciones" tam="1em" />
+                {SECCIONES[clave].nombre}
+              </a>
             </li>
           ))
         }
@@ -35,9 +40,28 @@ const legales = [
     <nav aria-label="El medio">
       <h2 class="mono titulo">El medio</h2>
       <ul>
-        <li><a href="/quien-escribe">Quién escribe</a></li>
-        {legales.map((l) => <li><a href={l.href}>{l.texto}</a></li>)}
-        <li><a href="/rss.xml">RSS</a></li>
+        <li>
+          <a href="/quien-escribe">
+            <Icono nombre="autor" tam="1em" />
+            Quién escribe
+          </a>
+        </li>
+        {
+          legales.map((l) => (
+            <li>
+              <a href={l.href}>
+                <Icono nombre={l.icono} tam="1em" />
+                {l.texto}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/rss.xml">
+            <Icono nombre="rss" tam="1em" />
+            RSS
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -91,6 +115,9 @@ const legales = [
   }
 
   ul a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
     color: var(--texto-2);
     font-size: 0.9rem;
     text-decoration: none;
