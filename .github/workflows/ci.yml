@@ -1,0 +1,65 @@
+# Integración continua de Modo Paranoia
+#
+# Qué hace: cada vez que subes código, GitHub levanta una máquina Linux limpia,
+# instala las dependencias y comprueba que el sitio compila y que el contenido
+# respeta el esquema. Si algo falla, el PR se marca en rojo antes de que llegue
+# a producción.
+#
+# Por qué importa aquí: el esquema de src/content.config.ts valida los artículos
+# con Zod — título de máximo 90 caracteres, `fuentes` obligatorio, sección dentro
+# del enum. Sin esto, un artículo mal formado no se detecta hasta que Cloudflare
+# Pages intenta construirlo y el despliegue falla. Con esto, se detecta en el PR.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Si subes dos veces seguidas a la misma rama, cancela la ejecución anterior:
+# no tiene sentido gastar minutos comprobando un commit que ya quedó atrás.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# El flujo solo necesita leer el repositorio. Darle los permisos mínimos es la
+# práctica correcta en un repositorio público.
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Comprobar tipos y compilar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          # La misma versión que usas en local y que usará Cloudflare Pages.
+          # Astro exige 22.12 o superior y no admite versiones impares.
+          node-version: 24
+          # Guarda en caché las dependencias entre ejecuciones: la segunda vez
+          # que corra, la instalación tarda segundos en vez de un minuto.
+          cache: npm
+
+      - name: Instalar dependencias
+        # `npm ci` y no `npm install`: instala exactamente las versiones que dice
+        # package-lock.json y falla si el lock está desincronizado. Es lo que se
+        # quiere en una máquina de integración, donde nada debe cambiar solo.
+        run: npm ci
+
+      - name: Comprobar tipos y esquemas de contenido
+        # Valida TypeScript, las plantillas .astro y los esquemas Zod de las
+        # colecciones. Un artículo con el front matter mal escrito muere aquí.
+        run: npm run check
+
+      - name: Compilar el sitio
+        # La comprobación anterior no garantiza que el sitio compile: `astro build`
+        # es el que ejecuta de verdad los componentes. Si un icono no existe en
+        # docs/assets/, este paso falla con el nombre del icono que falta.
+        run: npm run build
