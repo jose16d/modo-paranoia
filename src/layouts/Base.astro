@@ -13,6 +13,7 @@ import '@fontsource/jetbrains-mono/latin-400.css';
 import '@fontsource/jetbrains-mono/latin-600.css';
 import '../styles/global.css';
 
+import { getEntry } from 'astro:content';
 import CabeceraSitio from '../components/CabeceraSitio.astro';
 import PieSitio from '../components/PieSitio.astro';
 import { SITIO } from '../lib/secciones';
@@ -28,6 +29,8 @@ interface Props {
   noIndexar?: boolean;
   /** Ruta absoluta del sitio, p. ej. `/og.png`. Sin ella se usa la imagen de marca. */
   imagen?: string;
+  /** Identificador en la colección `autores`. Solo se usa en páginas de artículo. */
+  autor?: string;
 }
 
 const {
@@ -38,6 +41,7 @@ const {
   actualizado,
   noIndexar = false,
   imagen = '/og.png',
+  autor = 'jose',
 } = Astro.props;
 
 const tituloCompleto = titulo === SITIO.nombre ? titulo : `${titulo} · ${SITIO.nombre}`;
@@ -59,6 +63,17 @@ const canonica = new URL(rutaCanonica(Astro.url.pathname), base).href;
 // Las redes sociales exigen URL absoluta en og:image; una ruta relativa se ignora.
 const imagenAbsoluta = new URL(imagen, base).href;
 
+/*
+ * El autor se lee de la colección `autores` en vez de escribirlo a mano. Así el
+ * JSON-LD declara también el cargo, la biografía y los perfiles externos con
+ * `sameAs`, que es lo que Google usa para atar la pieza a una persona real y
+ * verificable. Es la señal de E-E-A-T más barata que tiene un medio de una sola
+ * persona, y sin ella un artículo de análisis crítico no se distingue de uno
+ * anónimo generado en masa.
+ */
+const autorEntrada = esArticulo ? await getEntry('autores', autor) : undefined;
+const perfiles = autorEntrada?.data.enlaces.map((e) => e.url) ?? [];
+
 const jsonLd = esArticulo
   ? {
       '@context': 'https://schema.org',
@@ -69,7 +84,16 @@ const jsonLd = esArticulo
       dateModified: (actualizado ?? publicado)?.toISOString(),
       inLanguage: 'es',
       mainEntityOfPage: canonica,
-      author: { '@type': 'Person', name: 'Jose', url: `${SITIO.url}/quien-escribe` },
+      image: imagenAbsoluta,
+      author: {
+        '@type': 'Person',
+        name: autorEntrada?.data.nombre ?? 'Jose',
+        url: `${SITIO.url}/quien-escribe`,
+        jobTitle: autorEntrada?.data.rol,
+        description: autorEntrada?.data.bio,
+        // `sameAs` solo se emite si hay perfiles: un array vacío es ruido.
+        ...(perfiles.length > 0 ? { sameAs: perfiles } : {}),
+      },
       publisher: { '@type': 'Organization', name: SITIO.nombre, url: SITIO.url },
     }
   : {
