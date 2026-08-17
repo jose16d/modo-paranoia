@@ -60,3 +60,18 @@ export const SITIO = {
   correo: 'hola@modoparanoia.com',
   idioma: 'es',
 } as const;
+
+/**
+ * Interruptor del modo «sitio en construcción».
+ *
+ * Con `true`, Base.astro hace dos cosas de una vez: pinta el aviso en todas las
+ * páginas y declara `noindex`. El aviso es para las personas; el `noindex` es
+ * para que Google no se quede con el montaje indexado mientras el sitio vive en
+ * `*.pages.dev`. Para lanzar de verdad se pone en `false`: una sola edición
+ * apaga las dos cosas, que es justamente el punto de que sea una sola variable.
+ *
+ * El tipo se anota como `boolean` a propósito. Sin la anotación, TypeScript lo
+ * infiere como el literal `true` y da por imposible cualquier rama que cuente
+ * con que valga `false`.
+ */
+export const EN_CONSTRUCCION: boolean = true;

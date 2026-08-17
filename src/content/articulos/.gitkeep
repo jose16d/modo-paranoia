@@ -1,0 +1,7 @@
+Al borrar el último artículo, esta carpeta quedó vacía — y git no versiona carpetas
+vacías, así que desaparecía en cada clon limpio (CI y Cloudflare Pages incluidos) y
+`astro check` avisaba de que el directorio base no existe.
+
+Este archivo la mantiene en el repositorio. El cargador de contenido solo recoge
+`**/*.{md,mdx}`, así que no lo interpreta como un artículo. Aquí va el primer artículo
+de verdad; se puede borrar este archivo cuando lo haya.

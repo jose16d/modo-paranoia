@@ -14,9 +14,10 @@ import '@fontsource/jetbrains-mono/latin-600.css';
 import '../styles/global.css';
 
 import { getEntry } from 'astro:content';
+import AvisoConstruccion from '../components/AvisoConstruccion.astro';
 import CabeceraSitio from '../components/CabeceraSitio.astro';
 import PieSitio from '../components/PieSitio.astro';
-import { SITIO } from '../lib/secciones';
+import { EN_CONSTRUCCION, SITIO } from '../lib/secciones';
 
 interface Props {
   titulo: string;
@@ -114,7 +115,14 @@ const jsonLd = esArticulo
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonica} />
-    {noIndexar && <meta name="robots" content="noindex" />}
+    {
+      /*
+       * Mientras el sitio esté en construcción, ninguna página se indexa. Es una
+       * etiqueta y no una regla `Disallow` en robots.txt a propósito: ver la
+       * explicación en public/robots.txt.
+       */
+    }
+    {(noIndexar || EN_CONSTRUCCION) && <meta name="robots" content="noindex" />}
 
     {/* El .ico es solo para navegadores viejos; los actuales prefieren el SVG. */}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -142,6 +150,7 @@ const jsonLd = esArticulo
 
   <body>
     <a href="#contenido" class="saltar">Saltar al contenido</a>
+    {EN_CONSTRUCCION && <AvisoConstruccion />}
     <CabeceraSitio />
     <main id="contenido">
       <slot />
