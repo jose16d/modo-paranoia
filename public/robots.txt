@@ -2,6 +2,18 @@
 #
 # Todo el sitio es rastreable. Los artículos con `borrador: true` no se compilan
 # en producción, así que no existen como página y no hace falta bloquearlos aquí.
+#
+# MIENTRAS EL SITIO ESTÉ EN CONSTRUCCIÓN: no añadir `Disallow: /`.
+# Parece lo lógico, y es justo lo contrario de lo que hay que hacer. `Disallow`
+# no significa «no indexes», significa «no entres». Google respeta la orden de no
+# entrar, pero si alguien enlaza una URL del sitio puede listarla igual, sin
+# título ni descripción, porque para saber que no debe indexarla tendría que
+# leer la etiqueta `noindex`... que está dentro de la página en la que le
+# acabamos de prohibir entrar.
+#
+# Por eso el bloqueo va como etiqueta `noindex` en el <head> de cada página
+# (ver EN_CONSTRUCCION en src/lib/secciones.ts): se deja entrar al rastreador
+# precisamente para que pueda leer que no debe indexar.
 
 User-agent: *
 Allow: /

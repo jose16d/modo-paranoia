@@ -1,0 +1,61 @@
+---
+/**
+ * Aviso de sitio en construcción.
+ *
+ * Se muestra en todas las páginas mientras `EN_CONSTRUCCION` sea `true`
+ * (ver src/lib/secciones.ts). Lo inserta Base.astro, no cada página.
+ *
+ * No lleva botón de cerrar a propósito: descartarlo exige guardar ese estado
+ * en el navegador, y eso son cookies o localStorage más el JavaScript que los
+ * maneja. Un aviso temporal no justifica ninguna de las tres cosas, y menos en
+ * un sitio cuya página de cookies presume de no instalar ninguna.
+ */
+import Icono from './Icono.astro';
+---
+
+<aside class="construccion" aria-label="Estado del sitio">
+  <p class="contenedor">
+    <Icono nombre="alerta" tam="1.05em" />
+    <span>
+      <strong>Sitio en construcción.</strong> Estamos montando Modo Paranoia: lo que ves es
+      la estructura, todavía sin artículos publicados.
+    </span>
+  </p>
+</aside>
+
+<style>
+  /*
+   * Ámbar y no verde, por dos razones. La de marca: el verde es el acento y no
+   * puede pasar del 10% de la pantalla, así que gastarlo en una banda que sale
+   * en todas las páginas lo devalúa. La de significado: el ámbar ya es en este
+   * sitio el color de «esto es provisional» — es el mismo lenguaje visual que
+   * el aviso de borrador de un artículo (src/pages/articulos/[...slug].astro).
+   *
+   * Contraste: ámbar #FFB020 sobre la mezcla resultante (#251E13) da 9,01:1,
+   * muy por encima del 4,5:1 que exige WCAG AA para texto normal.
+   */
+  .construccion {
+    background: color-mix(in srgb, var(--ambar) 10%, var(--onix));
+    border-block-end: 1px solid color-mix(in srgb, var(--ambar) 35%, transparent);
+    color: var(--ambar);
+    font-size: 0.9rem;
+  }
+
+  .construccion p {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding-block: 0.7rem;
+  }
+
+  /*
+   * :global() porque el SVG lo dibuja <Icono>, y el hash de ámbito de Astro
+   * solo llega a los elementos escritos en esta plantilla.
+   * `flex: none` evita que el icono se aplaste cuando el texto pasa a dos
+   * líneas en pantallas estrechas.
+   */
+  .construccion :global(svg) {
+    flex: none;
+    margin-block-start: 0.2em;
+  }
+</style>
