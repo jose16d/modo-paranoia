@@ -1,0 +1,50 @@
+---
+/**
+ * Inserta un icono del kit de marca como SVG inline.
+ *
+ * El icono hereda el color del texto que lo rodea (`currentColor`) y, por defecto,
+ * su tamaño (`1em`), así que acompaña a la tipografía sin ajustes manuales.
+ *
+ * Accesibilidad: sin `etiqueta` el icono es decorativo y queda oculto para los
+ * lectores de pantalla. Solo lleva `etiqueta` cuando el icono es la única
+ * información — por ejemplo, un enlace sin texto visible.
+ */
+import { obtenerIcono, type FamiliaIcono } from '../lib/iconos';
+
+interface Props {
+  /** Nombre del archivo sin extensión. Ver docs/assets/iconos/ */
+  nombre: string;
+  familia?: FamiliaIcono;
+  /** Tamaño. Número = píxeles; cadena = cualquier unidad CSS. */
+  tam?: string | number;
+  /** Solo si el icono transmite información que no está en el texto. */
+  etiqueta?: string;
+  clase?: string;
+}
+
+const { nombre, familia = 'iconos', tam = '1em', etiqueta, clase } = Astro.props;
+const { cuerpo, atributos } = obtenerIcono(nombre, familia);
+const medida = typeof tam === 'number' ? `${tam}px` : tam;
+---
+
+<svg
+  {...atributos}
+  width={medida}
+  height={medida}
+  class:list={['icono', clase]}
+  role={etiqueta ? 'img' : undefined}
+  aria-label={etiqueta}
+  aria-hidden={etiqueta ? undefined : 'true'}
+  focusable="false"
+  set:html={cuerpo}
+/>
+
+<style>
+  .icono {
+    display: inline-block;
+    /* Alinea el icono con la línea base del texto en vez de con su borde inferior */
+    vertical-align: -0.125em;
+    /* Dentro de un flex, impide que el icono se aplaste cuando falta espacio */
+    flex: none;
+  }
+</style>
