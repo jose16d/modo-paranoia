@@ -11,37 +11,41 @@ const secciones = [
 
 const articulos = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/articulos' }),
-  schema: ({ image }) =>
-    z.object({
-      titulo: z.string().max(90),
-      bajada: z.string().max(180),
-      seccion: z.enum(secciones),
-      autor: z.string().default('jose'),
-      fecha: z.coerce.date(),
-      actualizado: z.coerce.date().optional(),
-      portada: image().optional(),
-      portadaAlt: z.string().optional(),
-      /*
-       * Las etiquetas son texto libre a propósito, pero su clave es la URL
-       * (`/etiqueta/{clave}`), y `aClave` descarta todo lo que no sea letra o
-       * número. Una etiqueta como «···» daría clave vacía y una ruta rota, así
-       * que se rechaza aquí: `astro check` lo caza en el PR, no en producción.
-       */
-      etiquetas: z
-        .array(
-          z.string().refine((e) => aClave(e) !== '', {
-            message:
-              'Una etiqueta necesita al menos una letra o un número: es lo que forma su URL.',
-          }),
-        )
-        .default([]),
-      destacado: z.boolean().default(false),
-      borrador: z.boolean().default(true),
-      fuentes: z
-        .array(z.object({ titulo: z.string(), url: z.url() }))
-        .default([]),
-      usoIA: z.string().optional(),
-    }),
+  /*
+   * `portada` y `portadaAlt` vivieron aquí desde la Fase 4 y **nunca los pintó nada**:
+   * eran campos muertos que invitaban a rellenarlos creyendo que hacían algo. La
+   * tarjeta social se genera del título en src/lib/og.ts, así que no hacen falta. Si
+   * algún día una pieza pide una imagen propia —una captura de una cláusula, una
+   * gráfica—, se vuelven a añadir con `image()` y `og.ts` los toma como excepción.
+   */
+  schema: z.object({
+    titulo: z.string().max(90),
+    bajada: z.string().max(180),
+    seccion: z.enum(secciones),
+    autor: z.string().default('jose'),
+    fecha: z.coerce.date(),
+    actualizado: z.coerce.date().optional(),
+    /*
+     * Las etiquetas son texto libre a propósito, pero su clave es la URL
+     * (`/etiqueta/{clave}`), y `aClave` descarta todo lo que no sea letra o
+     * número. Una etiqueta como «···» daría clave vacía y una ruta rota, así
+     * que se rechaza aquí: `astro check` lo caza en el PR, no en producción.
+     */
+    etiquetas: z
+      .array(
+        z.string().refine((e) => aClave(e) !== '', {
+          message:
+            'Una etiqueta necesita al menos una letra o un número: es lo que forma su URL.',
+        }),
+      )
+      .default([]),
+    destacado: z.boolean().default(false),
+    borrador: z.boolean().default(true),
+    fuentes: z
+      .array(z.object({ titulo: z.string(), url: z.url() }))
+      .default([]),
+    usoIA: z.string().optional(),
+  }),
 });
 
 const autores = defineCollection({
