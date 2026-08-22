@@ -7,12 +7,23 @@
  * (`modo-autopsia` → `docs/assets/secciones/modo-autopsia.svg`). No hay un campo
  * `icono` porque sería repetir la clave; la convención se verifica sola, ya que
  * `astro build` falla si el archivo no existe. Ver src/lib/iconos.ts.
+ *
+ * Aquí solo van **formatos**: qué forma tiene la pieza. La mirada local
+ * (Colombia y LATAM) fue una sección y dejó de serlo el 21 ago 2026 — es el
+ * diferenciador del medio y atraviesa las tres, así que vive en `etiquetas`
+ * y en la política editorial, no en un cajón propio. Ver BITACORA.md.
  */
 export interface Seccion {
   nombre: string;
   descripcion: string;
-  /** Variable CSS del color de acento. Ver src/styles/tokens.css */
-  color: '--neon' | '--ambar' | '--alerta' | '--neon-deep';
+  /**
+   * Variable CSS del color de acento. Ver src/styles/tokens.css
+   *
+   * `--neon-deep` no está en la unión: ninguna sección lo usa. El token sigue
+   * existiendo en tokens.css porque lo gastan el hover de `.boton` y el logotipo
+   * sobre fondo claro. Si algún día una sección lo reclama, se añade aquí.
+   */
+  color: '--neon' | '--ambar' | '--alerta';
   ritmo: string;
 }
 
@@ -37,13 +48,6 @@ export const SECCIONES = {
       'Leemos los términos de servicio, el paper o la resolución que nadie lee, y traducimos lo que realmente dicen.',
     color: '--ambar',
     ritmo: 'Mensual',
-  },
-  'modo-local': {
-    nombre: 'Modo Local',
-    descripcion:
-      'Una tendencia global aterrizada con datos y regulación de Colombia y América Latina.',
-    color: '--neon-deep',
-    ritmo: 'Quincenal',
   },
 } as const satisfies Record<string, Seccion>;
 
