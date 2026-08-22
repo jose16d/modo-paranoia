@@ -19,7 +19,12 @@
   #
   # FASE 6: Sveltia CMS carga su propio JavaScript en /admin. Cuando llegue ese paso
   # hay que añadir una regla específica para `/admin/*` en vez de aflojar esta.
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+  # `form-action` incluye app.kit.com porque el formulario de El Correo envía ahí
+  # con un POST nativo del navegador. Se ensancha **solo esa** directiva: el
+  # embebido con JavaScript de Kit habría obligado a tocar `script-src`, y meter
+  # JavaScript de terceros en la portada cuesta el TBT de 0 ms que sostiene toda
+  # la elección de stack. Ver src/components/SuscripcionCorreo.astro.
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self' https://app.kit.com; frame-ancestors 'none'
 
 # Astro pone una huella en el nombre de cada recurso compilado: si cambia el
 # contenido, cambia el nombre. Por eso se pueden cachear para siempre.

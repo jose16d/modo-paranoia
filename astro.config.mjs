@@ -40,5 +40,21 @@ export default defineConfig({
     format: 'file',
   },
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      /*
+       * El sitemap solo lista lo que queremos que Google indexe. Una página que
+       * declara `noIndexar` en Base.astro y a la vez aparece aquí manda dos señales
+       * opuestas: «esta URL existe, tenla en cuenta» y «no la indexes».
+       *
+       * `/404` ya lo excluye la integración por su cuenta. `/gracias` hay que
+       * excluirlo a mano porque es una página normal a ojos del build.
+       *
+       * **Si algún día añades otra página con `noIndexar`, va también en esta lista.**
+       * No se puede automatizar: el sitemap se genera fuera del renderizado y no ve
+       * las props con las que se llamó al layout.
+       */
+      filter: (pagina) => !pagina.endsWith('/gracias'),
+    }),
+  ],
 });
