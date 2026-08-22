@@ -234,6 +234,35 @@ code, kbd, pre, samp {
   border: 1px solid var(--borde);
 }
 
+/*
+ * Pie de foto.
+ *
+ * Markdown no tiene sintaxis para `<figcaption>`, y escribir la imagen como HTML
+ * crudo la deja fuera de `astro:assets`: se pierden el WebP, el `loading="lazy"` y
+ * los atributos `width`/`height` que evitan el desplazamiento de la maquetación.
+ * Así que la convención de la casa es la imagen y, justo debajo, un párrafo que
+ * contenga **solo** texto en cursiva. Esto lo pinta como lo que es.
+ *
+ * `:has()` hace el trabajo. Donde no exista, el pie se ve como un párrafo en
+ * cursiva: menos bonito, igual de legible. No hay nada que degradar.
+ */
+.prosa p:has(> img) {
+  margin-block-end: 0.6rem;
+}
+
+.prosa p:has(> img) + p:has(> em:only-child) {
+  margin-block-start: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--texto-2);
+  text-align: center;
+}
+
+/* Ya se distingue por tamaño y color; la cursiva encima sobra. */
+.prosa p:has(> img) + p > em:only-child {
+  font-style: normal;
+}
+
 .prosa hr {
   border: 0;
   border-top: 1px solid var(--borde);
