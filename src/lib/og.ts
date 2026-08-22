@@ -10,7 +10,7 @@ import { SECCIONES, SITIO, type ClaveSeccion, type Seccion } from './secciones';
  * **Por qué generada y no una imagen por pieza.** WhatsApp, LinkedIn, X y Facebook
  * cachean la tarjeta de forma agresiva: la que se sirva el día que se comparte un
  * artículo es la que se queda. Con un ensayo semanal y una sola persona, depender de
- * conseguir y recortar una imagen cada viernes garantiza que tarde o temprano una
+ * conseguir y recortar una imagen cada sábado garantiza que tarde o temprano una
  * pieza salga con la tarjeta genérica — y esa es justo la que no se puede corregir
  * después. Generarla del título elimina el paso manual y, de paso, el riesgo de
  * derechos de imagen.
