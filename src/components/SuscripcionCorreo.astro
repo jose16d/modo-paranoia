@@ -1,0 +1,120 @@
+---
+/**
+ * Formulario de suscripción a El Correo.
+ *
+ * **Por qué no es el bloque que da Kit.** El embebido oficial trae un
+ * `<script src="https://f.convertkit.com/ckjs/ck.5.js">` y ~400 líneas de CSS propio.
+ * Las dos cosas chocan con este sitio:
+ *
+ * 1. La CSP declara `script-src 'self'`, así que ese script no se ejecutaría. Y
+ *    aflojarla para meter JavaScript de terceros en la portada cuesta el TBT de 0 ms
+ *    que es la razón medida por la que este proyecto eligió Astro y no WordPress.
+ * 2. Su CSS trae fondo claro, azul #1677BE y tipografías ajenas. En Ónix desentona, y
+ *    el botón azul sobre oscuro no cumple ninguna de las reglas de contraste del kit.
+ *
+ * **Qué se pierde sin el script.** Nada del envío: el formulario hace un POST nativo
+ * del navegador, que es HTML de 1995 y funciona en todo. Lo que se pierde es el
+ * mensaje de éxito *dentro* de la página: sin JavaScript el navegador navega a donde
+ * responda Kit. Por eso conviene que en Kit el `after_subscribe` sea **redirect** a
+ * `/gracias` y no *message*: así el lector vuelve al sitio, en español, en vez de
+ * aterrizar en una página de Kit en inglés.
+ *
+ * El `action` y el identificador del formulario **no son secretos**: viajan en el HTML
+ * de la portada, a la vista de cualquiera. Lo que nunca va aquí es una clave de API.
+ */
+import Icono from './Icono.astro';
+
+/** Formulario «El Correo — portada» en Kit. */
+const FORMULARIO_KIT = '9832509';
+---
+
+<form
+  class="suscripcion"
+  action={`https://app.kit.com/forms/${FORMULARIO_KIT}/subscriptions`}
+  method="post"
+>
+  <label class="mono rotulo" for="correo-suscripcion">Tu correo</label>
+
+  <div class="fila">
+    <input
+      id="correo-suscripcion"
+      type="email"
+      name="email_address"
+      required
+      autocomplete="email"
+      spellcheck="false"
+      placeholder="tucorreo@ejemplo.com"
+    />
+    <button type="submit" class="boton">
+      Suscribirme
+      <Icono nombre="flecha-derecha" tam="1em" />
+    </button>
+  </div>
+
+  <p class="nota">
+    Sin spam y sin ceder tus datos a nadie. Te puedes dar de baja desde cualquier correo.
+    Qué hacemos con tu dirección, en <a href="/privacidad">privacidad</a>.
+  </p>
+</form>
+
+<style>
+  .suscripcion {
+    margin-block-start: 1.6rem;
+  }
+
+  .rotulo {
+    display: block;
+    color: var(--texto-2);
+    font-size: 0.8rem;
+    margin-block-end: 0.5rem;
+  }
+
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  input {
+    flex: 1 1 16rem;
+    min-width: 0;
+    background: var(--onix);
+    color: var(--texto);
+    font-family: var(--f-ui);
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+  }
+
+  /*
+   * `--texto-2` sobre Ónix da 8,03:1, muy por encima del 4,5:1 de WCAG AA. Un
+   * marcador de posición más apagado se lee como campo desactivado.
+   */
+  input::placeholder {
+    color: var(--texto-2);
+    opacity: 1;
+  }
+
+  /*
+   * El foco de global.css solo alcanza a `a` y `button`. Un campo de texto sin
+   * indicador de foco visible deja tirado a quien navega con el teclado.
+   */
+  input:focus-visible {
+    outline: 2px solid var(--neon);
+    outline-offset: 2px;
+    border-color: var(--neon);
+  }
+
+  button {
+    /* `.boton` ya pone Ónix sobre verde: 14,23:1. No tocar ese par. */
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .nota {
+    color: var(--texto-2);
+    font-size: 0.85rem;
+    margin-block-start: 0.9rem;
+  }
+</style>

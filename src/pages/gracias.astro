@@ -1,0 +1,99 @@
+---
+/**
+ * Página de aterrizaje tras enviar el formulario de El Correo.
+ *
+ * Existe porque el formulario funciona **sin JavaScript**: el navegador hace un POST
+ * nativo y navega a donde responda Kit. Sin esta página, el lector saldría del sitio
+ * y aterrizaría en una pantalla de Kit en inglés. Con ella vuelve aquí, en español.
+ *
+ * Requiere que en Kit el formulario tenga `after_subscribe` en **redirect** apuntando
+ * a `https://modoparanoia.com/gracias`. Si estuviera en *message*, esta página no se
+ * llega a ver y el lector acaba en la de Kit.
+ *
+ * Va con `noIndexar`: es una página de tránsito, no tiene nada que ofrecer en una
+ * búsqueda y solo diluiría el sitemap.
+ */
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+---
+
+<Base
+  titulo="Ya casi"
+  descripcion="Falta un paso para recibir El Correo: confirmar tu dirección."
+  noIndexar
+>
+  <div class="contenedor bloque">
+    <p class="mono">El Correo</p>
+
+    <h1>
+      <Icono nombre="correo" tam="0.8em" />
+      Ya casi
+    </h1>
+
+    <p class="entradilla medida">
+      Te acabamos de enviar un correo para confirmar la dirección. <strong>Hasta que no
+      lo abras y confirmes, no estás suscrito</strong> — lo pedimos así a propósito: es
+      la única forma de que nadie apunte tu dirección sin tu permiso.
+    </p>
+
+    <div class="tarjeta medida">
+      <h2 class="mono rotulo">
+        <Icono nombre="alerta" tam="1.05em" />
+        Si no lo ves
+      </h2>
+      <p>
+        Revisa la carpeta de spam o promociones. Llega desde un remitente de
+        <code>modoparanoia.com</code>. Si no aparece en unos minutos, escríbenos y lo
+        miramos.
+      </p>
+    </div>
+
+    <p class="salida">
+      <a class="boton boton--fantasma" href="/">
+        <Icono nombre="flecha-izquierda" tam="1em" />
+        Volver a la portada
+      </a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .bloque {
+    padding-block: 3.5rem 4rem;
+  }
+
+  .bloque h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-block-start: 0.8rem;
+    color: var(--neon);
+  }
+
+  .entradilla {
+    margin-block-start: 1.2rem;
+    font-size: 1.15rem;
+    color: var(--texto-2);
+  }
+
+  .tarjeta {
+    margin-block-start: 2.5rem;
+  }
+
+  .rotulo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-block-end: 0.7rem;
+    color: var(--ambar);
+  }
+
+  .tarjeta p {
+    color: var(--texto-2);
+    font-size: 0.95rem;
+  }
+
+  .salida {
+    margin-block-start: 2.5rem;
+  }
+</style>
