@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Icono from './Icono.astro';
 import { SECCIONES } from '../lib/secciones';
+import { formatearFechaCorta } from '../lib/articulos';
 
 interface Props {
   articulo: CollectionEntry<'articulos'>;
@@ -12,11 +13,7 @@ interface Props {
 const { articulo, grande = false } = Astro.props;
 const seccion = SECCIONES[articulo.data.seccion];
 
-const fecha = articulo.data.fecha.toLocaleDateString('es-CO', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-});
+const fecha = formatearFechaCorta(articulo.data.fecha);
 ---
 
 <article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
