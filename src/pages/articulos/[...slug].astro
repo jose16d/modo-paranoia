@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icono from '../../components/Icono.astro';
 import { obtenerArticulos, formatearFecha, minutosDeLectura } from '../../lib/articulos';
-import { SECCIONES } from '../../lib/secciones';
+import { SECCIONES, SITIO } from '../../lib/secciones';
 import { aClave } from '../../lib/etiquetas';
 
 export async function getStaticPaths() {
@@ -27,6 +27,8 @@ const minutos = minutosDeLectura(articulo.body ?? '');
   publicado={articulo.data.fecha}
   actualizado={articulo.data.actualizado}
   autor={articulo.data.autor}
+  imagen={`/og/${articulo.id}.png`}
+  imagenAlt={`${articulo.data.titulo} — ${seccion.nombre} en ${SITIO.nombre}`}
 >
   <article class="contenedor" style={`--acento: var(${seccion.color})`}>
     <header class="encabezado">

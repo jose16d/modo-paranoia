@@ -30,6 +30,13 @@ interface Props {
   noIndexar?: boolean;
   /** Ruta absoluta del sitio, p. ej. `/og.png`. Sin ella se usa la imagen de marca. */
   imagen?: string;
+  /**
+   * Texto alternativo de `og:image`. Lo leen los lectores de pantalla dentro de las
+   * redes sociales, así que una página con tarjeta propia debe describir **esa**
+   * tarjeta y no la marca. Por defecto describe la genérica, que es la que sirven
+   * las páginas institucionales.
+   */
+  imagenAlt?: string;
   /** Identificador en la colección `autores`. Solo se usa en páginas de artículo. */
   autor?: string;
 }
@@ -42,6 +49,7 @@ const {
   actualizado,
   noIndexar = false,
   imagen = '/og.png',
+  imagenAlt = `${SITIO.nombre} — ${SITIO.eslogan}`,
   autor = 'jose',
 } = Astro.props;
 
@@ -141,7 +149,7 @@ const jsonLd = esArticulo
     <meta property="og:image" content={imagenAbsoluta} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${SITIO.nombre} — ${SITIO.eslogan}`} />
+    <meta property="og:image:alt" content={imagenAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={imagenAbsoluta} />
 
