@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { aClave } from './lib/etiquetas';
 
 const secciones = [
   'lo-bueno-lo-malo-lo-feo',
@@ -20,7 +21,20 @@ const articulos = defineCollection({
       actualizado: z.coerce.date().optional(),
       portada: image().optional(),
       portadaAlt: z.string().optional(),
-      etiquetas: z.array(z.string()).default([]),
+      /*
+       * Las etiquetas son texto libre a propósito, pero su clave es la URL
+       * (`/etiqueta/{clave}`), y `aClave` descarta todo lo que no sea letra o
+       * número. Una etiqueta como «···» daría clave vacía y una ruta rota, así
+       * que se rechaza aquí: `astro check` lo caza en el PR, no en producción.
+       */
+      etiquetas: z
+        .array(
+          z.string().refine((e) => aClave(e) !== '', {
+            message:
+              'Una etiqueta necesita al menos una letra o un número: es lo que forma su URL.',
+          }),
+        )
+        .default([]),
       destacado: z.boolean().default(false),
       borrador: z.boolean().default(true),
       fuentes: z
