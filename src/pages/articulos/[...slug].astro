@@ -75,18 +75,6 @@ const minutos = minutosDeLectura(articulo.body ?? '');
     </div>
 
     {
-      articulo.data.usoIA && (
-        <aside class="bloque">
-          <h2 class="mono rotulo">
-            <Icono nombre="cerebro-ia" tam="1.15em" />
-            Cómo usé IA en esta pieza
-          </h2>
-          <p>{articulo.data.usoIA}</p>
-        </aside>
-      )
-    }
-
-    {
       articulo.data.fuentes.length > 0 && (
         <section class="bloque">
           <h2 class="mono rotulo">

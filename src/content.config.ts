@@ -44,7 +44,17 @@ const articulos = defineCollection({
     fuentes: z
       .array(z.object({ titulo: z.string(), url: z.url() }))
       .default([]),
-    usoIA: z.string().optional(),
+    /*
+     * `usoIA` vivió aquí y pintaba un bloque al final de cada artículo. Se quitó el
+     * 22 ago 2026: la declaración del uso de IA es de sitio, no de pieza, y vive
+     * entera en `/metodologia` —qué se hace con modelos de lenguaje y qué no—. Esa
+     * página nunca prometió una declaración por artículo, así que quitarlo no rompe
+     * ninguna promesa pública. Se elimina del esquema y no solo de la plantilla para
+     * no dejar un campo muerto, que es el error que ya se cometió con `portada`.
+     *
+     * Sigue en pie lo que sí promete `/metodologia`: una imagen generada se declara
+     * **en su pie de foto**. Eso es cosa del pie, no de este campo.
+     */
   }),
 });
 
