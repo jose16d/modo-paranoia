@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Icono from '../../components/Icono.astro';
 import { obtenerArticulos, formatearFecha, minutosDeLectura } from '../../lib/articulos';
 import { SECCIONES } from '../../lib/secciones';
+import { aClave } from '../../lib/etiquetas';
 
 export async function getStaticPaths() {
   const articulos = await obtenerArticulos();
@@ -109,7 +110,7 @@ const minutos = minutosDeLectura(articulo.body ?? '');
         <p class="mono etiquetas">
           <Icono nombre="etiqueta" tam="1em" />
           {articulo.data.etiquetas.map((e) => (
-            <span>#{e}</span>
+            <a href={`/etiqueta/${aClave(e)}`}>#{e}</a>
           ))}
         </p>
       )
@@ -207,5 +208,14 @@ const minutos = minutosDeLectura(articulo.body ?? '');
     align-items: center;
     gap: 0.7rem;
     margin-block-start: 2.5rem;
+  }
+
+  .etiquetas a {
+    color: var(--texto-2);
+    text-decoration: none;
+  }
+
+  .etiquetas a:hover {
+    color: var(--neon);
   }
 </style>

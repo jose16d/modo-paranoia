@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+import { obtenerArticulos } from '../lib/articulos';
+import { indiceDeEtiquetas } from '../lib/etiquetas';
+
+const etiquetas = indiceDeEtiquetas(await obtenerArticulos());
+const total = etiquetas.length;
+---
+
+<Base
+  titulo="Etiquetas"
+  descripcion="Los temas que cruzan las secciones de Modo Paranoia: de qué trata cada pieza, no qué forma tiene."
+>
+  <div class="contenedor">
+    <header class="encabezado">
+      <p class="mono">Índice · {total} {total === 1 ? 'etiqueta' : 'etiquetas'}</p>
+      <h1>
+        <Icono nombre="etiqueta" tam="0.8em" />
+        Etiquetas
+      </h1>
+      <p class="entradilla medida">
+        Las secciones dicen qué forma tiene una pieza: tres actos, post-mortem, lectura
+        del documento. Las etiquetas dicen de qué trata, y por eso las cruzan. Aquí es
+        donde se ve junto lo que analizamos desde Colombia y desde LATAM, sin importar en
+        qué formato salió.
+      </p>
+    </header>
+
+    {
+      total === 0 ? (
+        <div class="tarjeta">
+          <p>
+            Todavía no hay ninguna etiqueta. Aparecen solas: cada pieza declara las suyas
+            en el campo <code>etiquetas</code> de su front matter.
+          </p>
+        </div>
+      ) : (
+        <ul class="nube">
+          {etiquetas.map((etiqueta) => (
+            /*
+             * El `aria-label` existe porque el contenido visible se lee «Colombia 3»,
+             * y un número suelto no dice nada en voz alta. Al oído se anuncia
+             * «Colombia, 3 piezas»; a la vista sigue cabiendo en una ficha.
+             */
+            <li>
+              <a
+                class="ficha"
+                href={`/etiqueta/${etiqueta.clave}`}
+                aria-label={`${etiqueta.nombre}, ${etiqueta.articulos.length} ${
+                  etiqueta.articulos.length === 1 ? 'pieza' : 'piezas'
+                }`}
+              >
+                <span class="nombre">{etiqueta.nombre}</span>
+                <span class="mono cuenta" aria-hidden="true">
+                  {etiqueta.articulos.length}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .encabezado {
+    padding-block: 3.5rem 2rem;
+    border-block-end: 1px solid var(--borde);
+    margin-block-end: 2.5rem;
+  }
+
+  .encabezado h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-block-start: 0.8rem;
+  }
+
+  .entradilla {
+    margin-block-start: 1rem;
+    font-size: 1.1rem;
+    color: var(--texto-2);
+  }
+
+  .nube {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    list-style: none;
+    padding: 0;
+    margin-block-end: 3rem;
+  }
+
+  .ficha {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.5rem 0.9rem;
+    /* Carbono sobre Ónix se separa 1,21:1: sin borde la ficha no existe */
+    background: var(--carbono);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    color: var(--texto);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .ficha:hover {
+    border-color: var(--neon);
+    color: var(--neon);
+  }
+
+  .cuenta {
+    font-size: 0.8rem;
+    color: var(--texto-2);
+  }
+
+  .ficha:hover .cuenta {
+    color: var(--neon);
+  }
+</style>

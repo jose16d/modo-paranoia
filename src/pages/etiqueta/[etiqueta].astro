@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icono from '../../components/Icono.astro';
+import TarjetaArticulo from '../../components/TarjetaArticulo.astro';
+import { obtenerArticulos } from '../../lib/articulos';
+import { indiceDeEtiquetas } from '../../lib/etiquetas';
+
+/*
+ * A diferencia de `/seccion/[seccion]`, aquí no hay estado vacío que escribir:
+ * una sección existe porque está declarada en secciones.ts aunque nadie haya
+ * escrito todavía en ella, mientras que una etiqueta solo existe porque hay al
+ * menos una pieza que la lleva. Con la colección vacía esto genera cero páginas,
+ * que es exactamente lo correcto.
+ */
+export async function getStaticPaths() {
+  const etiquetas = indiceDeEtiquetas(await obtenerArticulos());
+
+  return etiquetas.map((etiqueta) => ({
+    params: { etiqueta: etiqueta.clave },
+    props: { etiqueta },
+  }));
+}
+
+const { etiqueta } = Astro.props;
+const piezas = etiqueta.articulos.length;
+---
+
+<Base
+  titulo={`#${etiqueta.nombre}`}
+  descripcion={`${piezas === 1 ? 'La pieza' : `Las ${piezas} piezas`} de Modo Paranoia sobre ${etiqueta.nombre}.`}
+>
+  <div class="contenedor">
+    <header class="encabezado">
+      <p class="mono">
+        <a href="/etiquetas">Etiquetas</a> · {piezas}
+        {piezas === 1 ? 'pieza' : 'piezas'}
+      </p>
+      <h1>
+        <Icono nombre="etiqueta" tam="0.8em" />
+        {etiqueta.nombre}
+      </h1>
+      <p class="entradilla medida">
+        Una etiqueta cruza las tres secciones: agrupa por tema, no por formato.
+      </p>
+    </header>
+
+    <div class="rejilla">
+      {etiqueta.articulos.map((articulo) => <TarjetaArticulo articulo={articulo} />)}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .encabezado {
+    padding-block: 3.5rem 2rem;
+    border-block-end: 1px solid var(--borde);
+    margin-block-end: 2.5rem;
+  }
+
+  .encabezado h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-block-start: 0.8rem;
+    /* Acento verde en un titular corto: bien por debajo del 10% de superficie */
+    color: var(--neon);
+  }
+
+  .entradilla {
+    margin-block-start: 1rem;
+    font-size: 1.1rem;
+    color: var(--texto-2);
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.1rem;
+  }
+</style>
