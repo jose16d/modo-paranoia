@@ -6,7 +6,6 @@ const secciones = [
   'lo-bueno-lo-malo-lo-feo',
   'modo-autopsia',
   'letra-pequena',
-  'modo-local',
 ] as const;
 
 const articulos = defineCollection({
