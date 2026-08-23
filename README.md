@@ -8,18 +8,25 @@ Modelo de ensayo, no de noticia.
 ## Arquitectura
 
 Sitio estático generado con **Astro 7** y desplegado en **Cloudflare Pages**.
-La edición se hace desde un CMS basado en Git: el panel escribe un commit mediante la API
-de GitHub, y ese commit dispara el build. No hay servidor ni base de datos que mantener, y
-el contenido son archivos Markdown de este repositorio — sin dependencia de proveedor.
+El contenido son archivos Markdown de este repositorio: se escriben, entran por *pull
+request* y el merge dispara el build. No hay servidor, base de datos ni panel que mantener,
+y no hay dependencia de proveedor — el sitio entero se reconstruye desde este repositorio.
 
 | Capa | Tecnología |
 |---|---|
 | Framework | Astro 7 · Content Collections validadas con Zod |
 | Hosting | Cloudflare Pages |
-| CMS | Sveltia CMS en `/admin` |
-| Autenticación del panel | Cloudflare Workers · OAuth de GitHub |
-| Analítica | Cloudflare Web Analytics (sin cookies) |
+| Edición | Markdown en el repositorio, vía pull request |
+| Tarjetas sociales | Generadas al compilar con satori + sharp, una por artículo |
+| Buscador | Pendiente (Pagefind) |
 | CI | GitHub Actions · `astro check` + build |
+
+> **Sobre el panel de edición.** El plan original contemplaba un CMS basado en Git
+> (Sveltia CMS en `/admin`, autenticado con un Worker y OAuth de GitHub). Se descartó al
+> comprobar que el requisito real —publicar desde otro computador— ya lo resuelve el editor
+> web de GitHub sin infraestructura añadida. Lo que aportaba el CMS era un formulario que
+> valida el *front matter*, no una capacidad nueva; esa validación la hace `astro check` en
+> cada *pull request*. **Nunca se desplegó, y el README lo anunciaba como si existiera.**
 
 ## Estructura
 
@@ -29,15 +36,18 @@ src/
 ├── styles/       tokens de diseño y sistema de componentes
 ├── layouts/      Base (head, SEO, JSON-LD) y Pagina
 ├── components/   cabecera, pie, tarjeta de artículo, Icono
-├── content/      artículos y autores en Markdown
-└── pages/        rutas del sitio
+├── content/      artículos y autores en Markdown, con sus imágenes al lado
+└── pages/
+    ├── og/       endpoint que genera la tarjeta social de cada artículo
+    └── ...       rutas del sitio
 public/           lo que se sirve tal cual: favicon, og.png, robots.txt, _headers
 docs/
 ├── kit-de-marca.html
-├── assets/       logotipos, iconos, patrones y recursos sociales
-├── adr/          decisiones de arquitectura
-└── diagramas/    diagramas Mermaid
+└── assets/       logotipos, iconos, patrones y recursos sociales
 ```
+
+Los ADR y los diagramas de arquitectura están planificados y todavía no existen; cuando
+se escriban vivirán en `docs/adr/` y `docs/diagramas/`.
 
 ## Recursos de marca
 
