@@ -78,4 +78,4 @@ export const SITIO = {
  * infiere como el literal `true` y da por imposible cualquier rama que cuente
  * con que valga `false`.
  */
-export const EN_CONSTRUCCION: boolean = true;
+export const EN_CONSTRUCCION: boolean = false;
