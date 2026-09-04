@@ -71,6 +71,16 @@ en PNG porque ninguna red social acepta SVG en `og:image`.
     npm run dev      # http://localhost:4321
     npm run check    # validación de tipos y de esquemas de contenido
     npm run build
+    npm run preview  # http://localhost:4321 — sirve el dist/ ya compilado
+
+`npm run preview` no es un lujo: es el único modo de ver en local lo que verá el visitante.
+El servidor de desarrollo no compila el HTML igual que el build, así que hay fallos que
+sencillamente no se ven en `npm run dev`. Este proyecto se llevó uno —el espacio que
+desaparecía antes de un enlace, resuelto con `compressHTML: false` en `astro.config.mjs`— y
+se detectó mirando el sitio ya desplegado, que es el peor sitio para enterarse.
+
+Ocupa el mismo puerto que `dev`, así que los dos no corren a la vez. Para levantarlos en
+paralelo: `npm run preview -- --port 4322`.
 
 ## Despliegue
 

@@ -24,8 +24,11 @@ dist/
 .env.*
 !.env.example
 
-# Ajustes locales de herramientas — pueden contener rutas y permisos de esta máquina
-.claude/settings.local.json
+# Configuración local de Claude Code — no se publica.
+# `settings.local.json` puede llevar rutas y permisos de esta máquina; `launch.json` no
+# tiene datos personales, pero la carpeta entera es configuración de una herramienta
+# externa y no del proyecto. Cómo se levanta el sitio está documentado en el README.
+.claude/
 
 # Sistema operativo
 .DS_Store
