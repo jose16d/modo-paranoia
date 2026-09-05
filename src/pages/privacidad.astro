@@ -1,13 +1,31 @@
 ---
 /*
  * Revisada y aprobada por Jose el 16 de agosto de 2026.
+ * Actualizada el 5 de septiembre de 2026, por dos motivos distintos:
+ *
+ *   1. CORRECCIÓN DE HECHO. Decía que el sitio usa Cloudflare Web Analytics, y
+ *      eso se apagó el 22 de agosto de 2026 — la CSP bloqueaba su beacon y nunca
+ *      llegó a recoger un dato. Ahora la analítica es la de zona de Cloudflare,
+ *      que se calcula en el proxy: no envía JavaScript ni pone cookies, así que
+ *      la conclusión de la página (no hace falta banner) sigue siendo cierta,
+ *      pero por el motivo correcto.
+ *   2. PÚBLICO NUEVO. Al cerrarse R2 el público pasó a ser todo el
+ *      hispanohablante, España incluida, así que citar solo la ley colombiana
+ *      dejaba fuera a una parte de los lectores.
  *
  * Describe con exactitud el estado técnico ACTUAL del sitio (analítica sin
  * cookies, sin publicidad, newsletter en Kit). Hay que actualizarla cuando
  * se active AdSense: ahí sí entran cookies publicitarias y consentimiento
  * previo. Ver el bloque marcado más abajo.
  *
- * Base normativa citada: Ley 1581 de 2012 y Decreto 1074 de 2015 (Colombia).
+ * Base normativa citada: Ley 1581 de 2012 y Decreto 1074 de 2015 (Colombia),
+ * y el RGPD (UE) 2016/679 para los lectores del Espacio Económico Europeo.
+ *
+ * PENDIENTE DE VERIFICAR POR JOSE: Kit almacena la lista en Estados Unidos.
+ * Si se quiere declarar el mecanismo concreto que ampara esa transferencia
+ * (cláusulas contractuales tipo o Data Privacy Framework), hay que mirarlo en
+ * el acuerdo de tratamiento de datos de Kit. Aquí se declara el hecho de la
+ * transferencia, que es verificable, y no el mecanismo, que no se ha comprobado.
  */
 import Pagina from '../layouts/Pagina.astro';
 import { SITIO } from '../lib/secciones';
@@ -17,7 +35,7 @@ import { SITIO } from '../lib/secciones';
   titulo="Política de privacidad"
   descripcion="Qué datos recoge Modo Paranoia, para qué, y cómo ejercer tus derechos."
   entradilla="Escribo sobre privacidad. Lo mínimo es que la de este sitio sea legible y corta."
-  actualizado="16 de agosto de 2026"
+  actualizado="5 de septiembre de 2026"
 >
   <h2>Resumen en tres líneas</h2>
 
@@ -40,10 +58,11 @@ import { SITIO } from '../lib/secciones';
   <h3>Al leer</h3>
 
   <p>
-    Uso <strong>Cloudflare Web Analytics</strong>, que mide visitas sin cookies, sin
-    huella digital del navegador y sin recoger direcciones IP completas. No permite
-    identificarte ni seguirte entre sitios. Por eso este sitio no necesita mostrarte un
-    banner de consentimiento.
+    Uso la <strong>analítica de zona de Cloudflare</strong>, que cuenta las visitas en el
+    propio servidor por donde pasa la página. No envía nada a tu navegador: <strong>ni una
+    línea de JavaScript, ni una cookie</strong>. No permite identificarte ni seguirte entre
+    sitios. Por eso este sitio no necesita mostrarte un banner de consentimiento — no es que
+    lo evite, es que no hay nada que consentir.
   </p>
 
   <p>
@@ -58,6 +77,14 @@ import { SITIO } from '../lib/secciones';
     Si te suscribes a <em>El Correo</em>, recojo tu <strong>dirección de correo</strong> y,
     si lo escribes, tu nombre. Los almacena <strong>Kit</strong> (kit.com), un proveedor
     con servidores en Estados Unidos, que actúa como encargado del tratamiento.
+  </p>
+
+  <p>
+    <strong>La base de ese tratamiento es tu consentimiento</strong>, que das al suscribirte
+    y puedes retirar cuando quieras sin dar explicaciones. Como Kit guarda la lista en
+    Estados Unidos, si te suscribes desde la Unión Europea tus datos salen del Espacio
+    Económico Europeo: es una transferencia internacional, y la menciono porque tienes
+    derecho a saberlo antes de dejar tu correo.
   </p>
 
   <p>
@@ -86,9 +113,16 @@ import { SITIO } from '../lib/secciones';
   <h2>Tus derechos</h2>
 
   <p>
-    De acuerdo con la Ley 1581 de 2012 de Colombia, puedes en cualquier momento
-    <strong>conocer, actualizar, rectificar y suprimir</strong> tus datos, revocar la
-    autorización que diste, y solicitar prueba de esa autorización.
+    Puedes en cualquier momento <strong>conocer, actualizar, rectificar y suprimir</strong>
+    tus datos, y revocar la autorización que diste. Eso vale para todo el mundo, leas desde
+    donde leas: no me parece razonable dar un trato distinto según el país.
+  </p>
+
+  <p>
+    Lo que cambia es la norma que respalda esos derechos. <strong>En Colombia</strong> es la
+    Ley 1581 de 2012, que añade el derecho a solicitar prueba de la autorización que diste.
+    <strong>En la Unión Europea y el Espacio Económico Europeo</strong> es el RGPD, que añade
+    el derecho a oponerte al tratamiento, a limitarlo y a llevarte tus datos a otro servicio.
   </p>
 
   <p>
@@ -99,8 +133,10 @@ import { SITIO } from '../lib/secciones';
   </p>
 
   <p>
-    Si consideras que no atendí tu solicitud, puedes acudir a la Superintendencia de
-    Industria y Comercio.
+    Si consideras que no atendí tu solicitud, puedes acudir a la autoridad de control que
+    te corresponda: la <strong>Superintendencia de Industria y Comercio</strong> en Colombia,
+    la <strong>Agencia Española de Protección de Datos</strong> en España, o la autoridad
+    equivalente de tu país.
   </p>
 
   <h2>Cuánto tiempo se conservan</h2>
