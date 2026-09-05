@@ -17,8 +17,10 @@
   # es necesario porque Astro incrusta las hojas pequeñas en el HTML; los scripts NO
   # lo llevan, así que un script inyectado no se ejecuta.
   #
-  # FASE 6: Sveltia CMS carga su propio JavaScript en /admin. Cuando llegue ese paso
-  # hay que añadir una regla específica para `/admin/*` en vez de aflojar esta.
+  # No hay ninguna excepción para un panel de edición: la Fase 6 (Sveltia CMS en
+  # /admin, con un Worker de OAuth) se descartó el 5 de septiembre de 2026 y no se
+  # monta. Si algún día se retoma, la regla va específica para `/admin/*` y NO se
+  # afloja esta.
   # `form-action` incluye app.kit.com porque el formulario de El Correo envía ahí
   # con un POST nativo del navegador. Se ensancha **solo esa** directiva: el
   # embebido con JavaScript de Kit habría obligado a tocar `script-src`, y meter
