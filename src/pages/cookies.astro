@@ -1,6 +1,11 @@
 ---
 /*
  * Revisada y aprobada por Jose el 16 de agosto de 2026.
+ * Corregida el 5 de septiembre de 2026: decía que la analítica es Cloudflare
+ * Web Analytics, y eso se apagó el 22 de agosto — la CSP bloqueaba su beacon y
+ * nunca recogió un dato. La analítica real es la de zona, que se calcula en el
+ * proxy y no envía nada al navegador. La conclusión de la página no cambia;
+ * cambia el motivo, que ahora es más fuerte. Misma corrección en privacidad.astro.
  *
  * Describe el estado ACTUAL: sin cookies propias, sin publicidad.
  * Cuando se active AdSense hay que reescribir esta página entera y añadir
@@ -14,7 +19,7 @@ import { SITIO } from '../lib/secciones';
   titulo="Cookies"
   descripcion="Qué cookies usa Modo Paranoia. Spoiler: prácticamente ninguna."
   entradilla="La página de cookies más corta que vas a leer este año."
-  actualizado="16 de agosto de 2026"
+  actualizado="5 de septiembre de 2026"
 >
   <h2>Este sitio no instala cookies propias</h2>
 
@@ -27,9 +32,10 @@ import { SITIO } from '../lib/secciones';
   <h2>La analítica no usa cookies</h2>
 
   <p>
-    Uso <strong>Cloudflare Web Analytics</strong>, que cuenta visitas sin cookies y sin
-    identificar al visitante. Sé cuántas personas leyeron un artículo; no sé quién eres, ni
-    qué leíste antes, ni a dónde fuiste después.
+    Uso la <strong>analítica de zona de Cloudflare</strong>, que cuenta las visitas en el
+    servidor por donde pasa la página. No te llega nada: ni JavaScript, ni cookies, ni un
+    píxel. Sé cuántas personas leyeron un artículo; no sé quién eres, ni qué leíste antes,
+    ni a dónde fuiste después.
   </p>
 
   <h2>Excepciones honestas</h2>
