@@ -12,6 +12,11 @@
 /CLAUDE.md
 /_privado/
 
+# Borradores que deja la app de escritorio de Claude (por ahora, el texto de cada
+# edición de El Correo). Es material editorial de trabajo y va por el mismo criterio
+# que `_privado/`: el repositorio es público y esto no tiene por qué estar ahí.
+/Claude outputs/
+
 # Dependencias
 node_modules/
 

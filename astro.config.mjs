@@ -3,6 +3,16 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 
+import { mapaDeLastmod } from './src/lib/sitemap.ts';
+
+/**
+ * Ruta del sitio → fecha real, para el `<lastmod>` del sitemap. Se calcula una sola vez
+ * y **al generar el sitemap**, no al cargar la configuración: así `astro dev` no abre
+ * ningún archivo de contenido ni puede fallar por un front matter a medio escribir.
+ * @type {Map<string, string> | undefined}
+ */
+let lastmod;
+
 // https://astro.build/config
 export default defineConfig({
   // Necesario para generar URLs absolutas en el RSS, el sitemap y las etiquetas canónicas.
@@ -55,6 +65,25 @@ export default defineConfig({
        * las props con las que se llamó al layout.
        */
       filter: (pagina) => !pagina.endsWith('/gracias'),
+
+      /*
+       * `<lastmod>` por URL, y solo donde hay una fecha real que poner.
+       *
+       * **Cuidado con la opción `lastmod` de esta misma integración**, que es la que
+       * parece la respuesta y no lo es: acepta un único `Date` y lo estampa en las 24
+       * URLs por igual. Con la fecha de compilación, cada despliegue le diría a Google
+       * que el sitio entero cambió, y Google acaba ignorando el `lastmod` de un sitio
+       * que miente así. Por eso la fecha se decide URL por URL aquí abajo.
+       *
+       * De dónde sale cada fecha —y por qué las páginas fijas se quedan sin ninguna—
+       * está explicado en src/lib/sitemap.ts.
+       */
+      serialize(item) {
+        lastmod ??= mapaDeLastmod();
+        const fecha = lastmod.get(new URL(item.url).pathname);
+        if (fecha !== undefined) item.lastmod = fecha;
+        return item;
+      },
     }),
   ],
 });
