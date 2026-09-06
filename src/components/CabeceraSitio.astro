@@ -56,6 +56,7 @@ const rutaActual = Astro.url.pathname;
     color: var(--texto);
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .marca__acento {
@@ -82,5 +83,59 @@ const rutaActual = Astro.url.pathname;
   .nav a:hover,
   .nav a[aria-current='page'] {
     color: var(--neon);
+  }
+
+  /*
+   * En pantallas móviles (<640px), la fila única apretaba la marca y el menú,
+   * provocando que el enlace "Lo bueno, lo malo y lo feo" se partiera verticalmente
+   * en 5 líneas. Se organiza en dos filas compactas:
+   * 1. Marca arriba.
+   * 2. Carril horizontal deslizable debajo con todo el ancho disponible.
+   * flex-shrink: 0 y white-space: nowrap garantizan que cada enlace se lea en una
+   * sola línea horizontal fluida.
+   */
+  @media (max-width: 639px) {
+    .fila {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.45rem;
+      padding-block: 0.65rem 0.55rem;
+    }
+
+    .marca {
+      font-size: 1.1rem;
+    }
+
+    nav {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      /* Máscara suave en el borde derecho para sugerir que hay más enlaces */
+      mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1.15rem;
+      padding-inline-end: 2rem;
+    }
+
+    .nav li {
+      flex-shrink: 0;
+    }
+
+    .nav a {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 0.82rem;
+      padding-block: 0.15rem;
+    }
   }
 </style>
