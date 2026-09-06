@@ -268,3 +268,66 @@ code, kbd, pre, samp {
   border-top: 1px solid var(--borde);
   margin-block: 2.5em;
 }
+
+/*
+ * Módulos editoriales de apoyo (Callouts).
+ *
+ * Permiten que un autor destaque en Markdown una cifra comprobada, una cláusula
+ * analizada o una advertencia sin depender de librerías externas. Se escriben en
+ * Markdown como HTML nativo:
+ *
+ *     <aside class="callout callout--dato">
+ *       <p class="callout__rotulo">Dato verificado</p>
+ *       <p>El 40,55 % de los servidores MCP remotos carece de autenticación.</p>
+ *     </aside>
+ *
+ * Cumple WCAG 2.1: el fondo sutil color-mix mantiene el contraste de texto > 14:1.
+ */
+.prosa .callout {
+  border: 1px solid var(--borde);
+  border-inline-start: 4px solid var(--neon);
+  background: color-mix(in srgb, var(--neon) 5%, var(--carbono));
+  border-radius: 8px;
+  padding: 1.1rem 1.35rem;
+  margin-block: 2rem;
+}
+
+.prosa .callout p {
+  font-size: 0.95rem;
+}
+
+.prosa .callout p + p {
+  margin-block-start: 0.5em;
+}
+
+.prosa .callout__rotulo {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--neon);
+  margin-block-end: 0.35rem;
+}
+
+.prosa .callout--documento {
+  border-inline-start-color: var(--ambar);
+  background: color-mix(in srgb, var(--ambar) 5%, var(--carbono));
+}
+
+.prosa .callout--documento .callout__rotulo {
+  color: var(--ambar);
+}
+
+.prosa .callout--documento code {
+  font-size: 0.88em;
+}
+
+.prosa .callout--alerta {
+  border-inline-start-color: var(--alerta);
+  background: color-mix(in srgb, var(--alerta) 5%, var(--carbono));
+}
+
+.prosa .callout--alerta .callout__rotulo {
+  color: var(--alerta);
+}

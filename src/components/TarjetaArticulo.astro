@@ -17,10 +17,13 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
 ---
 
 <article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
-  <span class="etiqueta">
-    <Icono nombre={articulo.data.seccion} familia="secciones" tam="0.95em" />
-    {seccion.nombre}
-  </span>
+  <div class="cabecera-tarjeta">
+    <span class="etiqueta">
+      <Icono nombre={articulo.data.seccion} familia="secciones" tam="0.95em" />
+      {seccion.nombre}
+    </span>
+    {grande && <span class="mono kicker">Último ensayo</span>}
+  </div>
 
   <h3 class="titulo">
     <a href={`/articulos/${articulo.id}`}>{articulo.data.titulo}</a>
@@ -42,6 +45,25 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
 </article>
 
 <style>
+  .cabecera-tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .kicker {
+    font-size: 0.6875rem;
+    color: var(--acento, var(--neon));
+    letter-spacing: 0.14em;
+  }
+
+  .tarjeta--grande {
+    border-color: color-mix(in srgb, var(--acento, var(--neon)) 35%, var(--borde));
+    padding: clamp(1.6rem, 3.5vw, 2.2rem);
+  }
+
   .titulo {
     font-family: var(--f-ui);
     font-weight: 700;
@@ -54,8 +76,9 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
   .tarjeta--grande .titulo {
     font-family: var(--f-titular);
     font-weight: 800;
-    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-size: clamp(1.6rem, 3.4vw, 2.25rem);
     line-height: 1.12;
+    margin-block: 1rem 0.75rem;
   }
 
   .titulo a {
@@ -84,6 +107,12 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
     color: var(--texto-2);
     font-size: 0.95rem;
     flex: 1;
+  }
+
+  .tarjeta--grande .bajada {
+    font-size: clamp(1.02rem, 1.8vw, 1.12rem);
+    line-height: 1.55;
+    max-width: 60ch;
   }
 
   .pie {
