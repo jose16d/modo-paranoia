@@ -34,7 +34,7 @@ flowchart TD
         direction TB
         P["Webhook del push"] --> Q["Compilar con Node 24"]
         Q --> R["modoparanoia.com"]
-        P -.->|"Si Pages se queda mudo, ver R4"| S["Enlace de implementación,<br/>disparado a mano"]
+        P -.->|"Si Pages no dispara el despliegue"| S["Enlace de implementación,<br/>disparado a mano"]
         S --> Q
     end
 

@@ -43,11 +43,10 @@ src/
 public/           lo que se sirve tal cual: favicon, og.png, robots.txt, _headers
 docs/
 ├── kit-de-marca.html
+├── adr/          registro de decisiones de arquitectura (ADR)
+├── diagramas/    arquitectura y flujos del sistema en Mermaid
 └── assets/       logotipos, iconos, patrones y recursos sociales
 ```
-
-Los ADR y los diagramas de arquitectura están planificados y todavía no existen; cuando
-se escriban vivirán en `docs/adr/` y `docs/diagramas/`.
 
 ## Recursos de marca
 
@@ -104,6 +103,7 @@ Cloudflare, no en este repositorio: es DNS, no build.
 
 - Kit de marca, paleta y tipografía: `docs/kit-de-marca.html`
 - Decisiones de arquitectura: `docs/adr/`
+- Diagramas de arquitectura y flujos: `docs/diagramas/`
 
 ## Licencia
 
