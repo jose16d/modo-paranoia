@@ -120,7 +120,7 @@ code, kbd, pre, samp {
 /*
  * Tarjeta.
  * El borde NO es decorativo: Carbono sobre Ónix contrasta 1,21:1 y sin borde
- * la tarjeta es invisible. Ver CLAUDE.md.
+ * la tarjeta es invisible. Ver docs/kit-de-marca.html.
  */
 .tarjeta {
   background: var(--carbono);

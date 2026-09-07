@@ -8,10 +8,11 @@
  * `icono` porque sería repetir la clave; la convención se verifica sola, ya que
  * `astro build` falla si el archivo no existe. Ver src/lib/iconos.ts.
  *
- * Aquí solo van **formatos**: qué forma tiene la pieza. La mirada local
- * (Colombia y LATAM) fue una sección y dejó de serlo el 21 ago 2026 — es el
- * diferenciador del medio y atraviesa las tres, así que vive en `etiquetas`
- * y en la política editorial, no en un cajón propio. Ver BITACORA.md.
+ * Aquí solo van **formatos**: qué forma tiene la pieza. El anclaje local fue una
+ * sección y dejó de serlo el 21 ago 2026 — es el diferenciador del medio, atraviesa
+ * las tres y encerrarlo en un cajón hacía que las otras declararan por omisión que
+ * ahí no se hace lo que nos distingue. Vive en `etiquetas` y en la política
+ * editorial. Ver src/pages/politica-editorial.astro.
  */
 export interface Seccion {
   nombre: string;
