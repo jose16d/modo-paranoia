@@ -2,6 +2,8 @@
 titulo: La cláusula de buena fe que permite a Anthropic entregar tus datos sin orden judicial
 bajada: Anthropic cambió el estándar para ceder datos a autoridades. Ya no hace falta una obligación legal, basta su propio criterio. Leímos la sección 3 de la política vigente.
 seccion: letra-pequena
+imagen: ./2026-08-29-la-clausula-de-buena-fe-que-permite-a-anthropic-01.webp
+imagenAlt: 'Fotografía en ángulo de una pantalla con la página de inicio de Claude en modo oscuro, con el titular «Meet your thinking partner» y el campo de entrada de texto.'
 fecha: 2026-08-29
 etiquetas: ['Colombia', 'Ley 1581', 'Anthropic', 'privacidad']
 borrador: false
