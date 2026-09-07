@@ -5,9 +5,12 @@ import type { Articulo } from './articulos';
  *
  * Las secciones dicen qué **forma** tiene la pieza y viven en src/lib/secciones.ts
  * con una lista cerrada. Las etiquetas dicen de **qué** trata y son texto libre en
- * el front matter, a propósito: el diferenciador del medio —la mirada local,
- * Colombia y LATAM— atraviesa los tres formatos y no cabe en un cajón. Ver la
- * decisión del 21 ago 2026 en BITACORA.md.
+ * el front matter, a propósito: el diferenciador del medio —aterrizar la tendencia
+ * global en el marco normativo y en los casos que le tocan al lector— atraviesa los
+ * tres formatos y no cabe en un cajón.
+ *
+ * El anclaje puede ser colombiano, europeo o de donde salga el caso; lo que no
+ * cambia es que la norma se nombre. Ver src/pages/politica-editorial.astro.
  */
 
 /**
