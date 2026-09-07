@@ -2,6 +2,8 @@
 titulo: 'Agentes con MCP: la ilusión de control en la máquina local'
 bajada: 'El protocolo que conectó los agentes con todo lo demás cumplió un año con 10.000 servidores activos y un problema sin arreglar: el modelo no distingue una orden de un dato.'
 seccion: lo-bueno-lo-malo-lo-feo
+imagen: ./2026-09-05-agentes-con-mcp-la-ilusion-de-control-en-la-01.webp
+imagenAlt: 'Render tridimensional de decenas de cubos metálicos conectados entre sí por líneas turquesa sobre fondo azul, con algunos cubos aislados en los bordes.'
 fecha: 2026-09-05
 etiquetas: ['MCP', 'agentes de IA', 'inyección de instrucciones', 'LATAM']
 destacado: true

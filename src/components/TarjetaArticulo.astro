@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Icono from './Icono.astro';
 import { SECCIONES } from '../lib/secciones';
 import { formatearFechaCorta } from '../lib/articulos';
@@ -14,9 +15,35 @@ const { articulo, grande = false } = Astro.props;
 const seccion = SECCIONES[articulo.data.seccion];
 
 const fecha = formatearFechaCorta(articulo.data.fecha);
+
+/*
+ * Los `sizes` de la imagen describen el ancho real del recuadro, no `100vw`.
+ *
+ * El contenedor mide `100vw - 2.5rem` y la tarjeta añade su propio relleno, así que en un
+ * móvil de 375 px el hueco es de 282, no de 375. Declarar `100vw` exagera la medida: en
+ * una pantalla de densidad doble el navegador se lleva la variante de 1024 px —37 kB—
+ * donde le basta la de 640 —21 kB—, y en la tarjeta grande esa es la imagen del LCP.
+ *
+ * Los descuentos salen de sumar el relleno del contenedor y el de la tarjeta. Si cambian
+ * esos rellenos esto queda desafinado, y no pasa nada grave: `sizes` es una pista, así
+ * que el error cuesta bytes y nunca una imagen rota.
+ */
 ---
 
 <article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
+  <div class="recuadro">
+    <Image
+      src={articulo.data.imagen}
+      alt={articulo.data.imagenAlt}
+      widths={grande ? [640, 1024, 1600] : [320, 640]}
+      sizes={grande
+        ? '(max-width: 900px) calc(100vw - 91px), 1018px'
+        : '(max-width: 900px) calc(100vw - 85px), 320px'}
+      loading={grande ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </div>
+
   <div class="cabecera-tarjeta">
     <span class="etiqueta">
       <Icono nombre={articulo.data.seccion} familia="secciones" tam="0.95em" />
@@ -45,6 +72,37 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
 </article>
 
 <style>
+  /*
+   * El recuadro fija la proporción y recorta con `object-fit`, en vez de dejar que la
+   * imagen imponga su alto. Las piezas publicadas traen originales de 1:1, 16:9 y 4:3:
+   * sin recuadro, tres tarjetas de la misma rejilla salen con tres alturas distintas.
+   *
+   * La proporción va en el CSS y no en los atributos de la imagen a propósito. El
+   * navegador reserva el hueco antes de descargar nada, así que la maqueta no se
+   * desplaza aunque la imagen tarde — y `astro:assets` sigue emitiendo `width` y
+   * `height` reales, que es lo que evita el aviso de Lighthouse.
+   */
+  .recuadro {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    margin-block-end: 1.1rem;
+    background: var(--onix);
+  }
+
+  .recuadro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tarjeta--grande .recuadro {
+    aspect-ratio: 21 / 9;
+    margin-block-end: 1.4rem;
+  }
+
   .cabecera-tarjeta {
     display: flex;
     align-items: center;

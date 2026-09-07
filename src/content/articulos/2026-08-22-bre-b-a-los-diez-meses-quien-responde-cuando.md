@@ -2,6 +2,8 @@
 titulo: 'Bre-B a los diez meses: quién responde cuando la transferencia sale mal'
 bajada: Diez meses y 111 millones de llaves después, la regulación de Bre-B explica cómo se mueve el dinero y no dice quién asume la pérdida cuando lo mueve un estafador.
 seccion: lo-bueno-lo-malo-lo-feo
+imagen: ./2026-08-22-bre-b-a-los-diez-meses-quien-responde-cuando-01.webp
+imagenAlt: 'Logotipo de Bre-B en letras turquesa sobre un círculo azul, rodeado de monedas moradas flotantes y un símbolo de flechas de intercambio con un signo de dólar.'
 fecha: 2026-08-22
 etiquetas: ['Colombia', 'Bre-B', 'pagos inmediatos', 'LATAM']
 borrador: false
