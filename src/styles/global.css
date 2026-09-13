@@ -154,7 +154,12 @@ code, kbd, pre, samp {
   text-transform: uppercase;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  color: var(--acento, var(--neon));
+  /*
+   * `--acento-texto` existe para el único acento que no llega al 4,5:1 como texto pequeño
+   * sobre su propia píldora encima de Carbono: ver `--alerta-texto` en tokens.css y quién
+   * lo define en TarjetaArticulo.astro. Si nadie lo define, la etiqueta usa el acento tal cual.
+   */
+  color: var(--acento-texto, var(--acento, var(--neon)));
   background: color-mix(in srgb, var(--acento, var(--neon)) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--acento, var(--neon)) 32%, transparent);
   text-decoration: none;
