@@ -32,3 +32,31 @@
 # contenido, cambia el nombre. Por eso se pueden cachear para siempre.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# EXPERIMENTO (13 sep 2026): `no-transform` en las páginas que Cloudflare reescribe.
+#
+# Cloudflare modifica el HTML en su borde sin que el sitio lo pida. En `/contacto`,
+# `/cookies` y `/privacidad` su ofuscación de correos cambia cada dirección por
+# «[email protected]» y la recupera con un script, así que sin JavaScript la dirección
+# para ejercer los derechos no se ve. Y en todas las páginas inyecta el script de
+# JavaScript Detections, que la CSP bloquea (ver docs/adr/0004).
+#
+# Su documentación dice que con `Cache-Control: no-transform` no hace ninguna de las dos
+# cosas. Lo que no dice es si una cabecera de este archivo cuenta como «la del origen», y
+# advierte que la directiva **también puede apagar la compresión Brotli**. Por eso va
+# acotado: las tres páginas con correos y la portada, que sirve de prueba para el script.
+#
+# El valor repite el que Pages pone por defecto al HTML (`public, max-age=0,
+# must-revalidate`) porque una cabecera de este archivo **sustituye** a la de Pages: sin
+# repetirlo, las páginas perderían la revalidación y el navegador podría servirlas viejas.
+#
+# Se queda solo si, en producción, las cuatro páginas siguen con `Content-Encoding: br`
+# y la ofuscación desaparece. Si se pierde la compresión, se revierte.
+/
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/contacto
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/cookies
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/privacidad
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
