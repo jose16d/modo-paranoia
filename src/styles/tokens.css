@@ -8,6 +8,12 @@
   --neon-deep: #00B348;
   --ambar: #FFB020;
   --alerta: #FF5A5F;
+  /*
+   * Alerta aclarada un 15 % hacia --texto, solo para texto pequeño sobre la píldora de una
+   * tarjeta. Ahí --alerta da 4,44:1 y no llega al 4,5:1 de WCAG AA; esta da 4,96:1. No es
+   * un color nuevo de la marca: fuera de ese caso se sigue usando --alerta.
+   */
+  --alerta-texto: #FC7075;
 
   --f-titular: 'Syne', sans-serif;
   --f-ui: 'Space Grotesk', sans-serif;

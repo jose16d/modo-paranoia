@@ -21,6 +21,12 @@ en español.
   (`article:published_time`, `article:modified_time`), y prioridad alta de descarga para la
   imagen principal de la portada. ([#44](https://github.com/jose16d/modo-paranoia/pull/44))
 
+### Corregido
+
+- La etiqueta de Modo Autopsia en las tarjetas no alcanzaba el contraste AA de WCAG (4,44:1):
+  su texto usa ahora una variante aclarada del rojo de alerta (4,96:1).
+  ([#45](https://github.com/jose16d/modo-paranoia/pull/45))
+
 ### Documentación
 
 - ADR-0002: las fechas legibles se pintan en UTC.

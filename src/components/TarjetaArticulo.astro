@@ -30,18 +30,40 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
  */
 
 /*
- * `fetchpriority="high"` solo en la tarjeta grande, que es la imagen del LCP de la portada:
- * le dice al navegador que la pida antes que el resto de recursos de la misma prioridad.
+ * `fetchpriority="high"` solo en la tarjeta grande: le pide al navegador que descargue su
+ * imagen antes que otros recursos de la misma prioridad.
  *
- * **Por qué el atributo a mano y no la prop `priority` de Astro**, que parece lo mismo: esa
- * prop pone también `decoding="sync"`. Y el CLS móvil de la portada no está diagnosticado,
- * está tapado precisamente por cómo se carga esta imagen respecto al cambio de fuente. Se
- * toca lo mínimo —cuándo se pide— y no cómo se decodifica. Después de desplegar, se mide el
- * CLS en PageSpeed: si vuelve a aparecer, este atributo es el primer sospechoso.
+ * **Lo que se midió el 13 sep 2026, para no atribuirle más de lo que hace:**
+ *
+ * - **En móvil no mejora el LCP.** En un teléfono, el elemento más grande de la portada es el
+ *   titular `h1`, no esta imagen: la mediana del LCP salió igual con y sin el atributo.
+ * - **No causa el CLS móvil.** Ese desplazamiento es el cambio de fuente en el titular, y es
+ *   intermitente: en un A/B de 20 cargas por lado, con la emulación móvil de PageSpeed, salió
+ *   en 6 sin el atributo y en 8 con él. Es la misma carrera en los dos lados.
+ *
+ * Se queda porque no cuesta nada y ayuda donde la imagen sí sea el elemento más grande, algo
+ * que en escritorio no está medido. Va a mano y no con la prop `priority` de Astro porque esa
+ * prop también impone `decoding="sync"`, y aquí solo se quería tocar cuándo se pide.
  */
+
+/*
+ * El acento de la tarjeta y, en Modo Autopsia, también el color del texto de su etiqueta.
+ *
+ * La etiqueta pinta el nombre de la sección con el acento sobre una píldora del 12 % encima
+ * de Carbono. En verde da 8,76:1 y en ámbar 6,75:1, pero en rojo `--alerta` se queda en
+ * 4,44:1, por debajo del 4,5:1 que WCAG AA exige a un texto de 11 px. Por eso, solo en ese
+ * caso, la etiqueta usa `--alerta-texto` (4,96:1).
+ *
+ * El resto de textos rojos no lo necesita: el kicker y el título en hover no llevan píldora
+ * detrás y dan 5,16:1, y en la cabecera del artículo la misma píldora va sobre Ónix y da 5,56:1.
+ */
+const estiloAcento =
+  seccion.color === '--alerta'
+    ? '--acento: var(--alerta); --acento-texto: var(--alerta-texto)'
+    : `--acento: var(${seccion.color})`;
 ---
 
-<article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
+<article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={estiloAcento}>
   <div class="recuadro">
     <Image
       src={articulo.data.imagen}
