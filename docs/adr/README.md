@@ -62,3 +62,4 @@ se comprobó su decisión, probablemente todavía no es una decisión: es una in
 |---|---|---|
 | [0001](0001-compresion-de-html-desactivada.md) | La compresión de HTML se queda desactivada | Aceptado |
 | [0002](0002-fechas-en-utc.md) | Las fechas legibles se pintan en UTC | Aceptado |
+| [0003](0003-lastmod-por-url.md) | El `<lastmod>` del sitemap se decide URL por URL, y solo donde hay una fecha real | Aceptado |
