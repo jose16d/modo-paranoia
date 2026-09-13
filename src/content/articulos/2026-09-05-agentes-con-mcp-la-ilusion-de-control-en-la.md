@@ -6,7 +6,6 @@ imagen: ./2026-09-05-agentes-con-mcp-la-ilusion-de-control-en-la-01.webp
 imagenAlt: 'Render tridimensional de decenas de cubos metálicos conectados entre sí por líneas turquesa sobre fondo azul, con algunos cubos aislados en los bordes.'
 fecha: 2026-09-05
 etiquetas: ['MCP', 'agentes de IA', 'inyección de instrucciones', 'LATAM']
-destacado: true
 borrador: false
 fuentes:
   - titulo: Anthropic - Donating the Model Context Protocol and establishing the Agentic AI Foundation (9 dic 2025)
