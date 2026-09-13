@@ -26,6 +26,12 @@ en español.
 - Diagramas de la arquitectura de contenido y de la cadena de correo.
   ([#41](https://github.com/jose16d/modo-paranoia/pull/41))
 
+### Seguridad
+
+- Astro 7.3.2 y sharp 0.35.4, que corrigen una ejecución remota de código al optimizar
+  imágenes AVIF, y las dependencias transitivas `svgo` y `fast-uri` con avisos de seguridad.
+  ([#43](https://github.com/jose16d/modo-paranoia/pull/43))
+
 ## 2026-09-12
 
 ### Eliminado
