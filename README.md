@@ -104,6 +104,7 @@ Cloudflare, no en este repositorio: es DNS, no build.
 - Kit de marca, paleta y tipografía: `docs/kit-de-marca.html`
 - Decisiones de arquitectura: `docs/adr/`
 - Diagramas de arquitectura y flujos: `docs/diagramas/`
+- Registro de cambios, por fecha de despliegue: `CHANGELOG.md`
 
 ## Licencia
 
