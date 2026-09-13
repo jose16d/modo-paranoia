@@ -61,3 +61,4 @@ se comprobó su decisión, probablemente todavía no es una decisión: es una in
 | # | Decisión | Estado |
 |---|---|---|
 | [0001](0001-compresion-de-html-desactivada.md) | La compresión de HTML se queda desactivada | Aceptado |
+| [0002](0002-fechas-en-utc.md) | Las fechas legibles se pintan en UTC | Aceptado |
