@@ -25,5 +25,5 @@ request en GitHub ya lo dibuja, y es el sitio donde conviene mirarlo.
 | Diagrama | Qué explica |
 |---|---|
 | [flujo-de-publicacion.md](flujo-de-publicacion.md) | Del cambio en el disco a producción: rama, pull request, CI, fusión y despliegue en Cloudflare Pages. Incluye las tres puertas que pueden parar el cambio y la salida de emergencia cuando Pages se queda mudo |
-| *Arquitectura de contenido* | Pendiente — colección, esquema Zod, rutas, sitemap, RSS y tarjeta OG |
-| *Cadena de correo* | Pendiente — dominio, Email Routing, Gmail y Kit con DKIM, SPF y DMARC |
+| [arquitectura-de-contenido.md](arquitectura-de-contenido.md) | Del Markdown a todo lo que se publica: esquema Zod, `obtenerArticulos()`, rutas, tarjeta social, RSS y sitemap. Incluye los dos caminos hacia el mismo archivo y los tres sitios donde se filtra un borrador |
+| [cadena-de-correo.md](cadena-de-correo.md) | Las tres cadenas que comparten el dominio: correo entrante por Email Routing, respuestas desde Gmail y El Correo por Kit. Incluye cada registro DNS, por qué DMARC sigue en `p=none` y cómo se comprueba la cadena |
