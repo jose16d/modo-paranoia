@@ -55,7 +55,12 @@ const articulos = defineCollection({
           }),
         )
         .default([]),
-      destacado: z.boolean().default(false),
+      /*
+       * `destacado` vivió aquí con `default(false)` y nada del sitio lo leía: la portada
+       * elige su pieza grande por orden, en src/pages/index.astro, sin mirar este campo.
+       * Se quitó el 12 sep 2026 por el mismo motivo que `portada` y `usoIA`: un campo que
+       * nadie pinta solo invita a rellenarlo creyendo que hace algo.
+       */
       borrador: z.boolean().default(true),
       fuentes: z
         .array(z.object({ titulo: z.string(), url: z.url() }))
