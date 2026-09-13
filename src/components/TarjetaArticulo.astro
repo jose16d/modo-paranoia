@@ -28,6 +28,17 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
  * esos rellenos esto queda desafinado, y no pasa nada grave: `sizes` es una pista, así
  * que el error cuesta bytes y nunca una imagen rota.
  */
+
+/*
+ * `fetchpriority="high"` solo en la tarjeta grande, que es la imagen del LCP de la portada:
+ * le dice al navegador que la pida antes que el resto de recursos de la misma prioridad.
+ *
+ * **Por qué el atributo a mano y no la prop `priority` de Astro**, que parece lo mismo: esa
+ * prop pone también `decoding="sync"`. Y el CLS móvil de la portada no está diagnosticado,
+ * está tapado precisamente por cómo se carga esta imagen respecto al cambio de fuente. Se
+ * toca lo mínimo —cuándo se pide— y no cómo se decodifica. Después de desplegar, se mide el
+ * CLS en PageSpeed: si vuelve a aparecer, este atributo es el primer sospechoso.
+ */
 ---
 
 <article class:list={['tarjeta', { 'tarjeta--grande': grande }]} style={`--acento: var(${seccion.color})`}>
@@ -40,6 +51,7 @@ const fecha = formatearFechaCorta(articulo.data.fecha);
         ? '(max-width: 900px) calc(100vw - 91px), 1018px'
         : '(max-width: 900px) calc(100vw - 85px), 320px'}
       loading={grande ? 'eager' : 'lazy'}
+      fetchpriority={grande ? 'high' : undefined}
       decoding="async"
     />
   </div>

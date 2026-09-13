@@ -83,14 +83,26 @@ const imagenAbsoluta = new URL(imagen, base).href;
 const autorEntrada = esArticulo ? await getEntry('autores', autor) : undefined;
 const perfiles = autorEntrada?.data.enlaces.map((e) => e.url) ?? [];
 
+/*
+ * Las fechas de un artículo se declaran dos veces: en el JSON-LD, que lee Google, y en las
+ * etiquetas `article:*` de Open Graph, que leen LinkedIn, Facebook y compañía. Se calculan
+ * una sola vez aquí para que las dos señales no puedan contradecirse: si algún día cambia la
+ * regla —p. ej. qué fecha cuenta como modificación—, cambia en un único sitio.
+ *
+ * Sin `actualizado`, la modificación es la publicación, igual que en el JSON-LD de siempre.
+ * Son instantes en UTC, que es lo que guarda el front matter (ADR-0002).
+ */
+const fechaPublicacion = esArticulo ? publicado?.toISOString() : undefined;
+const fechaModificacion = esArticulo ? (actualizado ?? publicado)?.toISOString() : undefined;
+
 const jsonLd = esArticulo
   ? {
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: titulo,
       description: descripcion,
-      datePublished: publicado?.toISOString(),
-      dateModified: (actualizado ?? publicado)?.toISOString(),
+      datePublished: fechaPublicacion,
+      dateModified: fechaModificacion,
       inLanguage: 'es',
       mainEntityOfPage: canonica,
       image: imagenAbsoluta,
@@ -150,6 +162,8 @@ const jsonLd = esArticulo
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={imagenAlt} />
+    {fechaPublicacion && <meta property="article:published_time" content={fechaPublicacion} />}
+    {fechaModificacion && <meta property="article:modified_time" content={fechaModificacion} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={imagenAbsoluta} />
 
