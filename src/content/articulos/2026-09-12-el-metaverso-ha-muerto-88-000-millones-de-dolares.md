@@ -16,6 +16,16 @@ fuentes:
     url: https://uctoday.com/meta-pulls-the-plug-on-horizon-worlds-vr
   - titulo: Meta’s Reality Labs division lost $4.6 billion in second quarter — TechSpot
     url: https://www.techspot.com/news/113304-meta-reality-labs-division-lost-46-billion-q2.html
+  - titulo: Meta Reports Fourth Quarter and Full Year 2021 Results — Meta (2 de febrero de 2022)
+    url: https://s21.q4cdn.com/399680738/files/doc_financials/2021/q4/FB-12.31.2021-Exhibit-99.1-Final.pdf
+  - titulo: Meta Reports Fourth Quarter and Full Year 2023 Results — Meta (1 de febrero de 2024)
+    url: https://www.prnewswire.com/news-releases/meta-reports-fourth-quarter-and-full-year-2023-results-initiates-quarterly-dividend-302051285.html
+  - titulo: Meta Reports Fourth Quarter and Full Year 2025 Results — Meta (28 de enero de 2026)
+    url: https://s21.q4cdn.com/399680738/files/doc_financials/2025/q4/Meta-12-31-2025-Exhibit-99-1-FINAL.pdf
+  - titulo: Meta Reports First Quarter 2026 Results — Meta (29 de abril de 2026)
+    url: https://s21.q4cdn.com/399680738/files/doc_financials/2026/q1/Meta-03-31-2026-Exhibit-99-1_final.pdf
+  - titulo: Meta Reports Second Quarter 2026 Results — Meta (29 de julio de 2026)
+    url: https://www.prnewswire.com/news-releases/meta-reports-second-quarter-2026-results-302838214.html
   - titulo: Meta’s Horizon Worlds quality is so poor that even employees aren’t using it — Fortune
     url: https://fortune.com/2022/10/07/metas-horizon-world-quality-poor-not-even-employees-using-says-metaverse-vp-leaked-memo
   - titulo: Meta halves targeted user base for Horizon Worlds — MIXED News
@@ -59,7 +69,7 @@ Conviene entender por qué eso se creyó. No fue el anuncio de un producto: una 
 
 **15 de junio de 2026.** Horizon Worlds dejó de existir en los visores. Se acabaron la creación, la publicación y la actualización de mundos en realidad virtual. Sobrevive la aplicación móvil para iOS y Android: el proyecto que iba a sacarnos de la pantalla terminó siendo una pantalla.
 
-**29 de julio de 2026.** Reality Labs reportó 4.600 millones de dólares de pérdida operativa en el segundo trimestre, con 431 millones de ingresos. Diez dólares perdidos por cada dólar ingresado. El acumulado desde finales de 2020 ronda los 88.000 millones.
+**29 de julio de 2026.** Reality Labs reportó 4.600 millones de dólares de pérdida operativa en el segundo trimestre, con 431 millones de ingresos. Diez dólares perdidos por cada dólar ingresado. Desde el último trimestre de 2020, el primero que Meta desglosa por trimestres para Reality Labs, la división acumula cerca de 88.000 millones de pérdida operativa.
 
 El director de tecnología de Meta, Andrew Bosworth, lo explicó sin adornos: la visión integrada de Horizon y los visores «era demasiado», y la inversión «es mayor de lo que el crecimiento de este ecosistema va a permitir».
 
