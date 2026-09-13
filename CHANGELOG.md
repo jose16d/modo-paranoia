@@ -15,6 +15,12 @@ en español.
 
 ## 2026-09-13
 
+### Añadido
+
+- Fechas de publicación y modificación de cada artículo en Open Graph
+  (`article:published_time`, `article:modified_time`), y prioridad alta de descarga para la
+  imagen principal de la portada. ([#44](https://github.com/jose16d/modo-paranoia/pull/44))
+
 ### Documentación
 
 - ADR-0002: las fechas legibles se pintan en UTC.
