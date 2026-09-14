@@ -9,8 +9,10 @@ import { generarTarjeta } from '../../lib/og';
  * el PNG en `dist/`. En producción no corre nada — Cloudflare Pages sirve un archivo,
  * igual que el resto del sitio.
  *
- * Se genera también para los borradores. Cuestan unos milisegundos y evitan el fallo
- * tonto de compartir una pieza recién publicada y que la tarjeta no exista todavía.
+ * Sale de `obtenerArticulos()`, así que sigue el mismo filtro que las páginas: en
+ * producción **no hay tarjeta para un borrador**, y en `npm run dev` sí, para poder verla
+ * antes de publicar. La tarjeta se compila en el mismo despliegue que publica la pieza,
+ * así que no hay un momento en que el artículo exista y su tarjeta todavía no.
  */
 export async function getStaticPaths() {
   const articulos = await obtenerArticulos();

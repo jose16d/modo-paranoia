@@ -51,6 +51,35 @@ h3 {
   line-height: 1.08;
   letter-spacing: -0.025em;
   text-wrap: balance;
+  /*
+   * Red de seguridad contra el scroll horizontal. Syne 800 es muy ancha, y al tamaño
+   * mínimo del `h1` una sola palabra larga no cabe en un teléfono estrecho: «Analizamos»
+   * en la portada, «transferencia» en Bre-B o «colombiano» en el metaverso desbordaban a
+   * 320 px. Bajar el tamaño no lo arregla —siempre habrá una palabra más larga—; esto
+   * parte la palabra solo cuando no cabe entera en la línea, y en ningún otro caso.
+   *
+   * `anywhere` y no `break-word`, y la diferencia se midió. Los dos parten igual una
+   * palabra en un bloque normal, pero `break-word` no cambia el ancho mínimo del texto, y
+   * dentro de un `h1` con `display: flex` —icono y texto, como en `/etiqueta/*` y
+   * `/etiquetas`— el texto no encoge por debajo de ese mínimo. Con `break-word` esas siete
+   * páginas seguían desbordando a 320 px; con `anywhere`, no. En escritorio no cambia la
+   * altura de ningún titular.
+   */
+  overflow-wrap: anywhere;
+}
+
+/*
+ * En pantallas estrechas, además, guiones automáticos: la palabra se parte por una
+ * sílaba y con guion, en vez de por donde caiga. Usan el diccionario del idioma que
+ * declara `<html lang="es">`. Se limita a móvil porque en escritorio no hace falta partir
+ * nada, y `hyphens: auto` partiría palabras que caben, cambiando el titular.
+ */
+@media (max-width: 479px) {
+  h1,
+  h2,
+  h3 {
+    hyphens: auto;
+  }
 }
 
 h4,
