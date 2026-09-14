@@ -33,6 +33,17 @@ const { articulo, anterior, siguiente } = Astro.props;
 const { Content } = await render(articulo);
 const seccion = SECCIONES[articulo.data.seccion];
 const minutos = minutosDeLectura(articulo.body ?? '');
+
+/*
+ * La corrección más reciente arriba: es la que explica la versión que se está leyendo.
+ * `actualizado` solo se pinta si es posterior a la publicación; el mismo día no añade nada
+ * que no diga ya la fecha.
+ */
+const correcciones = [...articulo.data.correcciones].sort(
+  (a, b) => b.fecha.valueOf() - a.fecha.valueOf(),
+);
+const { fecha, actualizado } = articulo.data;
+const mostrarActualizado = actualizado !== undefined && actualizado.valueOf() > fecha.valueOf();
 ---
 
 <Base
@@ -58,9 +69,16 @@ const minutos = minutosDeLectura(articulo.body ?? '');
       <p class="mono meta">
         <span class="dato">
           <Icono nombre="calendario" tam="0.95em" />
-          <time datetime={articulo.data.fecha.toISOString()}>
-            {formatearFecha(articulo.data.fecha)}
+          <time datetime={fecha.toISOString()}>
+            {formatearFecha(fecha)}
           </time>
+          {
+            mostrarActualizado && (
+              <span>
+                · actualizado el <time datetime={actualizado.toISOString()}>{formatearFecha(actualizado)}</time>
+              </span>
+            )
+          }
         </span>
         <span class="dato">
           <Icono nombre="reloj" tam="0.95em" />
@@ -86,6 +104,23 @@ const minutos = minutosDeLectura(articulo.body ?? '');
     </header>
 
     <div class="prosa">
+      {
+        /*
+         * Dentro de `.prosa` y no fuera, para heredar la medida del texto y la familia
+         * `.callout` de global.css. Va antes del contenido: quien llega por un enlace viejo
+         * tiene que saber que algo cambió antes de leer la versión corregida.
+         */
+        correcciones.length > 0 && (
+          <aside class="callout callout--correccion" aria-label="Correcciones de esta pieza">
+            <p class="callout__rotulo">{correcciones.length === 1 ? 'Corrección' : 'Correcciones'}</p>
+            {correcciones.map((correccion) => (
+              <p>
+                <time datetime={correccion.fecha.toISOString()}>{formatearFecha(correccion.fecha)}</time>. {correccion.nota}
+              </p>
+            ))}
+          </aside>
+        )
+      }
       <Content />
     </div>
 

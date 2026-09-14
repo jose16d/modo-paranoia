@@ -20,6 +20,9 @@ en español.
 - Fechas de publicación y modificación de cada artículo en Open Graph
   (`article:published_time`, `article:modified_time`), y prioridad alta de descarga para la
   imagen principal de la portada. ([#44](https://github.com/jose16d/modo-paranoia/pull/44))
+- Nota visible de corrección en los artículos, arriba del texto, y la fecha de actualización
+  junto a la de publicación. El campo `correcciones` del esquema exige mover `actualizado`
+  con cada corrección. ([#49](https://github.com/jose16d/modo-paranoia/pull/49))
 
 ### Cambiado
 
