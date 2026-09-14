@@ -14,10 +14,9 @@ import '@fontsource/jetbrains-mono/latin-600.css';
 import '../styles/global.css';
 
 import { getEntry } from 'astro:content';
-import AvisoConstruccion from '../components/AvisoConstruccion.astro';
 import CabeceraSitio from '../components/CabeceraSitio.astro';
 import PieSitio from '../components/PieSitio.astro';
-import { EN_CONSTRUCCION, SITIO } from '../lib/secciones';
+import { SITIO } from '../lib/secciones';
 
 interface Props {
   titulo: string;
@@ -137,12 +136,13 @@ const jsonLd = esArticulo
     <link rel="canonical" href={canonica} />
     {
       /*
-       * Mientras el sitio esté en construcción, ninguna página se indexa. Es una
-       * etiqueta y no una regla `Disallow` en robots.txt a propósito: ver la
-       * explicación en public/robots.txt.
+       * `noindex` va como etiqueta y no como `Disallow` en robots.txt, a propósito: el
+       * rastreador tiene que poder entrar para leerla (ver public/robots.txt). Lo usan
+       * /404 y /gracias. Una página nueva con `noIndexar` va también al `filter` del
+       * sitemap en astro.config.mjs.
        */
     }
-    {(noIndexar || EN_CONSTRUCCION) && <meta name="robots" content="noindex" />}
+    {noIndexar && <meta name="robots" content="noindex" />}
 
     {/* El .ico es solo para navegadores viejos; los actuales prefieren el SVG. */}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -172,7 +172,6 @@ const jsonLd = esArticulo
 
   <body>
     <a href="#contenido" class="saltar">Saltar al contenido</a>
-    {EN_CONSTRUCCION && <AvisoConstruccion />}
     <CabeceraSitio />
     <main id="contenido">
       <slot />
