@@ -336,3 +336,24 @@ code, kbd, pre, samp {
 .prosa .callout--alerta .callout__rotulo {
   color: var(--alerta);
 }
+
+/*
+ * Nota de corrección de una pieza publicada. No se escribe a mano: la pinta
+ * src/pages/articulos/[...slug].astro a partir del campo `correcciones` del front matter.
+ *
+ * Ámbar y no alerta: en este sitio el ámbar es el color de los avisos editoriales (el de
+ * borrador y el de construcción), y el rojo es el de peligro y el de Modo Autopsia. Medido
+ * sobre el fondo real del recuadro, el 5 % de ámbar sobre Carbono (#2A2A2A): rótulo ámbar
+ * 7,85:1 y texto 11,93:1, los dos por encima de AA.
+ *
+ * Sin margen superior porque es lo primero de la prosa: el encabezado ya separa.
+ */
+.prosa .callout--correccion {
+  border-inline-start-color: var(--ambar);
+  background: color-mix(in srgb, var(--ambar) 5%, var(--carbono));
+  margin-block-start: 0;
+}
+
+.prosa .callout--correccion .callout__rotulo {
+  color: var(--ambar);
+}

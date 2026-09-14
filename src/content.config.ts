@@ -66,6 +66,28 @@ const articulos = defineCollection({
         .array(z.object({ titulo: z.string(), url: z.url() }))
         .default([]),
       /*
+       * Correcciones de una pieza ya publicada. `/politica-editorial` y `/metodologia`
+       * prometen que un error se corrige «con una nota visible que indica qué cambió y
+       * cuándo», y hasta el 13 sep 2026 no había dónde escribir esa nota: se habría
+       * improvisado en la prosa, distinta cada vez.
+       *
+       * Es un campo y no un recuadro escrito a mano en el Markdown por dos motivos. La
+       * plantilla lo pinta siempre igual y en el mismo sitio, arriba del texto. Y Zod puede
+       * exigir lo que a mano se olvida: que `actualizado` se mueva con la corrección (ver el
+       * `superRefine` de abajo), y con él el `dateModified` del JSON-LD, las etiquetas
+       * `article:*` y el `<lastmod>` del sitemap.
+       *
+       * `nota` es texto plano, sin Markdown: dice qué cambió, no vuelve a argumentar la pieza.
+       */
+      correcciones: z
+        .array(
+          z.object({
+            fecha: z.coerce.date(),
+            nota: z.string().min(1).max(500),
+          }),
+        )
+        .default([]),
+      /*
        * `usoIA` vivió aquí y pintaba un bloque al final de cada artículo. Se quitó el
        * 22 ago 2026: la declaración del uso de IA es de sitio, no de pieza, y vive
        * entera en `/metodologia` —qué se hace con modelos de lenguaje y qué no—. Esa
@@ -77,6 +99,34 @@ const articulos = defineCollection({
        * Sigue en pie lo que sí promete `/metodologia`: una imagen generada se declara
        * **en su pie de foto**. Eso es cosa del pie, no de este campo.
        */
+    }).superRefine((pieza, ctx) => {
+      /*
+       * Una corrección sin `actualizado`, o con un `actualizado` anterior a ella, dejaría
+       * la nota visible en la página y a la vez le diría a Google —JSON-LD, Open Graph y
+       * sitemap— que la pieza no cambió. Se rechaza aquí para que `astro check` lo cace en
+       * el PR y no dependa de que alguien se acuerde.
+       */
+      if (pieza.correcciones.length === 0) return;
+
+      const ultima = Math.max(...pieza.correcciones.map((c) => c.fecha.valueOf()));
+      if (pieza.actualizado === undefined || pieza.actualizado.valueOf() < ultima) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['actualizado'],
+          message:
+            'Una pieza con correcciones necesita `actualizado`, y no puede ser anterior a la última corrección.',
+        });
+      }
+
+      pieza.correcciones.forEach((correccion, indice) => {
+        if (correccion.fecha.valueOf() < pieza.fecha.valueOf()) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['correcciones', indice, 'fecha'],
+            message: 'Una corrección no puede ser anterior a la publicación de la pieza.',
+          });
+        }
+      });
     }),
 });
 
