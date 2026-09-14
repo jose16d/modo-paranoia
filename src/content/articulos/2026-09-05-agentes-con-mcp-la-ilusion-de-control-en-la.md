@@ -60,7 +60,7 @@ Hay una vía que el usuario nunca ve. Microsoft la documentó como envenenamient
 
 No localizamos ninguna medición pública de adopción ni de exposición de servidores MCP en Colombia o en la región. Sin fuente localizada. No la reemplazamos por la cifra global.
 
-Sobre la corazonada del editor: la dirección se sostiene, el mecanismo está corto. La fricción que se elimina no es la de copiar y pegar, es la de revisar cada permiso antes de concederlo. Y el ataque no llega solo dentro de un archivo de texto: llega en descripciones de herramientas que nadie lee, y en cuatro de cada diez servidores remotos ni siquiera hace falta, porque no preguntan quién llama. Atribuirlo todo a que el modelo no distingue órdenes de datos deja fuera la mitad del problema, que es seguridad web de manual: redirecciones abiertas, PKCE degradado, registro dinámico sin validar.
+La fricción que MCP elimina no es la de copiar y pegar: es la de revisar cada permiso antes de concederlo. Y el ataque no necesita un documento envenenado: llega en descripciones de herramientas que nadie lee, y en cuatro de cada diez servidores remotos ni siquiera hace falta, porque no preguntan quién llama. Atribuirlo todo a que el modelo no distingue órdenes de datos deja fuera la mitad del problema, que es seguridad web de manual: redirecciones abiertas, PKCE degradado, registro dinámico sin validar.
 
 ### Lo feo
 
