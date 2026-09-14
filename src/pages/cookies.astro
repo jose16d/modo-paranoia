@@ -7,6 +7,10 @@
  * proxy y no envía nada al navegador. La conclusión de la página no cambia;
  * cambia el motivo, que ahora es más fuerte. Misma corrección en privacidad.astro.
  *
+ * Corregida el 13 de septiembre de 2026: la descripción decía «Spoiler», un
+ * anglicismo evitable, y la excepción del formulario decía que «lo sirve Kit».
+ * El formulario es HTML de este sitio; lo que va a Kit son los datos al enviarlo.
+ *
  * Describe el estado ACTUAL: sin cookies propias, sin publicidad.
  * Cuando se active AdSense hay que reescribir esta página entera y añadir
  * un gestor de consentimiento. Ver bloque marcado.
@@ -17,9 +21,9 @@ import { SITIO } from '../lib/secciones';
 
 <Pagina
   titulo="Cookies"
-  descripcion="Qué cookies usa Modo Paranoia. Spoiler: prácticamente ninguna."
+  descripcion="Qué cookies usa Modo Paranoia. Respuesta corta: prácticamente ninguna."
   entradilla="La página de cookies más corta que vas a leer este año."
-  actualizado="5 de septiembre de 2026"
+  actualizado="13 de septiembre de 2026"
 >
   <h2>Este sitio no instala cookies propias</h2>
 
@@ -47,8 +51,8 @@ import { SITIO } from '../lib/secciones';
       para que el sitio siga en pie y no sirve para seguirte.
     </li>
     <li>
-      <strong>El formulario de la newsletter</strong> lo sirve Kit, que puede instalar sus
-      propias cookies al interactuar con él. Solo ocurre si usas el formulario.
+      <strong>El formulario de la newsletter</strong> envía tu correo a Kit, que puede
+      instalar sus propias cookies durante la suscripción. Solo ocurre si usas el formulario.
     </li>
   </ul>
 

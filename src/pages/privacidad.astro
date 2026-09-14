@@ -34,6 +34,18 @@
  * 9017) la marca «Inactive - Lapse» desde el 31 de julio de 2026 en los tres
  * marcos. Las cláusulas siguen siendo ciertas pase lo que pase con el DPF, y
  * por eso son las que se declaran.
+ *
+ * Actualizada el 13 de septiembre de 2026: CONTRASTADA CON LO QUE OCURRE DE VERDAD.
+ * - El formulario solo pide el correo: decía «y, si lo escribes, tu nombre».
+ * - Darse de baja NO borra el registro en Kit: lo deja «Unsubscribed» con su
+ *   historial (ayuda de Kit, «How to remove subscribers from your email list»).
+ *   Borrarlo es otra acción, y por eso se ofrece a petición.
+ * - Kit mide las aperturas con un píxel único por correo («How email open
+ *   tracking works»): no eran solo cifras agregadas, y se declara.
+ * - Plazos de la Ley 1581: consultas 10 días hábiles (art. 14), reclamos 15
+ *   (art. 15). Decía 15 para todo.
+ * - La Ley 1581 rige todo el tratamiento porque el responsable está en Colombia
+ *   (art. 2); antes se leía como si solo protegiera a lectores colombianos.
  */
 import Pagina from '../layouts/Pagina.astro';
 import { SITIO } from '../lib/secciones';
@@ -43,7 +55,7 @@ import { SITIO } from '../lib/secciones';
   titulo="Política de privacidad"
   descripcion="Qué datos recoge Modo Paranoia, para qué, y cómo ejercer tus derechos."
   entradilla="Escribo sobre privacidad. Lo mínimo es que la de este sitio sea legible y corta."
-  actualizado="12 de septiembre de 2026"
+  actualizado="13 de septiembre de 2026"
 >
   <h2>Resumen en tres líneas</h2>
 
@@ -82,8 +94,8 @@ import { SITIO } from '../lib/secciones';
   <h3>Al suscribirte a la newsletter</h3>
 
   <p>
-    Si te suscribes a <em>El Correo</em>, recojo tu <strong>dirección de correo</strong> y,
-    si lo escribes, tu nombre. Los almacena <strong>Kit</strong> (kit.com), un proveedor
+    Si te suscribes a <em>El Correo</em>, recojo tu <strong>dirección de correo</strong>, que
+    es lo único que pide el formulario. La almacena <strong>Kit</strong> (kit.com), un proveedor
     con servidores en Estados Unidos, que actúa como encargado del tratamiento.
   </p>
 
@@ -98,16 +110,18 @@ import { SITIO } from '../lib/secciones';
   </p>
 
   <p>
-    Uso esos datos únicamente para enviarte la newsletter y, de forma agregada, para saber
-    cuántas personas abren cada edición. <strong>No vendo, cedo ni intercambio la lista</strong>
-    con nadie, bajo ninguna circunstancia.
+    Uso tu correo únicamente para enviarte la newsletter. Kit registra además si abres cada
+    edición —con una imagen invisible de un píxel que va dentro del correo— y en qué enlaces
+    pulsas; yo miro esas cifras en conjunto, para saber qué se lee. Si bloqueas las imágenes
+    en tu programa de correo, la apertura no se registra. <strong>No vendo, cedo ni
+    intercambio la lista</strong> con nadie, bajo ninguna circunstancia.
   </p>
 
   <h3>Al escribirme</h3>
 
   <p>
-    Los correos que me envías llegan a mi buzón y se conservan mientras sean útiles para
-    responderte o corregir una pieza.
+    Los correos que me envías pasan por Cloudflare, que los reenvía a mi buzón de Gmail, y
+    se conservan mientras sean útiles para responderte o corregir una pieza.
   </p>
 
   <h2>Publicidad</h2>
@@ -129,16 +143,18 @@ import { SITIO } from '../lib/secciones';
   </p>
 
   <p>
-    Lo que cambia es la norma que respalda esos derechos. <strong>En Colombia</strong> es la
-    Ley 1581 de 2012, que añade el derecho a solicitar prueba de la autorización que diste.
-    <strong>En la Unión Europea y el Espacio Económico Europeo</strong> es el RGPD, que añade
-    el derecho a oponerte al tratamiento, a limitarlo y a llevarte tus datos a otro servicio.
+    Lo que cambia es la norma que los respalda. Como el responsable está en Colombia, el
+    tratamiento se rige por la <strong>Ley 1581 de 2012</strong>, que añade el derecho a
+    solicitar prueba de la autorización que diste. Si lees desde <strong>la Unión Europea o
+    el Espacio Económico Europeo</strong>, te ampara además el RGPD, que añade el derecho a
+    oponerte al tratamiento, a limitarlo y a llevarte tus datos a otro servicio.
   </p>
 
   <p>
     Para ejercerlos basta con escribir a
-    <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>. Respondo en un plazo máximo de
-    quince días hábiles. Para darte de baja de la newsletter también sirve el enlace que
+    <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>. Respondo las consultas en un
+    máximo de diez días hábiles y los reclamos en quince, que son los plazos de la Ley 1581.
+    Para darte de baja de la newsletter también sirve el enlace que
     aparece al final de cada envío: un clic, sin preguntas.
   </p>
 
@@ -152,8 +168,9 @@ import { SITIO } from '../lib/secciones';
   <h2>Cuánto tiempo se conservan</h2>
 
   <p>
-    Tu correo se conserva mientras sigas suscrito. Cuando te das de baja, tu registro se
-    elimina de la lista. Los datos de analítica son agregados y no se asocian a personas.
+    Tu correo se conserva mientras sigas suscrito. Si te das de baja, dejas de recibir
+    <em>El Correo</em>, pero Kit conserva tu registro marcado como baja, con el historial de
+    envíos. Si quieres que desaparezca del todo, pídemelo y lo borro. Los datos de analítica son agregados y no se asocian a personas.
   </p>
 
   <h2>Cambios</h2>
