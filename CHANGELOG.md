@@ -21,7 +21,19 @@ en español.
   (`article:published_time`, `article:modified_time`), y prioridad alta de descarga para la
   imagen principal de la portada. ([#44](https://github.com/jose16d/modo-paranoia/pull/44))
 
+### Cambiado
+
+- `/quien-escribe`, `/metodologia`, `/politica-editorial` y el kit de marca dejan de dar por
+  hecho un lector colombiano o latinoamericano: la regla de oro pide «un dato verificado sobre
+  el terreno» en lugar de «un dato local», y el SENA se explica.
+  ([#48](https://github.com/jose16d/modo-paranoia/pull/48))
+
 ### Corregido
+
+- `/privacidad`, `/cookies` y `/contacto` se ajustan a lo que ocurre de verdad: el formulario
+  solo pide el correo, darse de baja no borra el registro en Kit, El Correo mide las aperturas
+  y los plazos de respuesta son los de la Ley 1581.
+  ([#48](https://github.com/jose16d/modo-paranoia/pull/48))
 
 - La etiqueta de Modo Autopsia en las tarjetas no alcanzaba el contraste AA de WCAG (4,44:1):
   su texto usa ahora una variante aclarada del rojo de alerta (4,96:1).
