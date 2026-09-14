@@ -34,6 +34,13 @@ en español.
   el terreno» en lugar de «un dato local», y el SENA se explica.
   ([#48](https://github.com/jose16d/modo-paranoia/pull/48))
 
+### Eliminado
+
+- El modo «en construcción», apagado desde el lanzamiento del 22 de agosto: el componente del
+  aviso, el interruptor `EN_CONSTRUCCION` y su uso en la plantilla base. El comentario de
+  `robots.txt` conserva la explicación de por qué no se indexa con `Disallow`.
+  ([#52](https://github.com/jose16d/modo-paranoia/pull/52))
+
 ### Corregido
 
 - Los titulares con palabras largas se salían de la pantalla en teléfonos estrechos y
