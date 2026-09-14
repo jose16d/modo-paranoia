@@ -33,6 +33,9 @@ en español.
 
 ### Corregido
 
+- Los titulares con palabras largas se salían de la pantalla en teléfonos estrechos y
+  obligaban a desplazarse de lado: a 320 px pasaba en 11 de las 30 páginas. Ahora la palabra se
+  parte, con guion en móvil. ([#50](https://github.com/jose16d/modo-paranoia/pull/50))
 - `/privacidad`, `/cookies` y `/contacto` se ajustan a lo que ocurre de verdad: el formulario
   solo pide el correo, darse de baja no borra el registro en Kit, El Correo mide las aperturas
   y los plazos de respuesta son los de la Ley 1581.
@@ -44,6 +47,9 @@ en español.
 
 ### Documentación
 
+- El comentario de la ruta de las tarjetas sociales decía que se generan también para los
+  borradores, y en producción no es así.
+  ([#50](https://github.com/jose16d/modo-paranoia/pull/50))
 - ADR-0002: las fechas legibles se pintan en UTC.
   ([#37](https://github.com/jose16d/modo-paranoia/pull/37))
 - ADR-0003: el `<lastmod>` del sitemap se decide URL por URL.
