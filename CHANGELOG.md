@@ -23,6 +23,9 @@ en español.
 - Nota visible de corrección en los artículos, arriba del texto, y la fecha de actualización
   junto a la de publicación. El campo `correcciones` del esquema exige mover `actualizado`
   con cada corrección. ([#49](https://github.com/jose16d/modo-paranoia/pull/49))
+- Archivo de artículos en `/articulos`, que antes daba 404: todas las piezas en una lista por
+  año, enlazada desde la cabecera, el pie y la portada. La portada muestra ahora la pieza más
+  reciente y las 6 siguientes. ([#51](https://github.com/jose16d/modo-paranoia/pull/51))
 
 ### Cambiado
 

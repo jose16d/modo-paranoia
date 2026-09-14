@@ -25,8 +25,8 @@ import { join } from 'node:path';
  * - **Los artículos:** `actualizado ?? fecha` del front matter. Es exactamente la misma
  *   pareja que ya alimenta `dateModified` del JSON-LD en `Base.astro`, así que el sitemap
  *   y los datos estructurados no pueden contarle a Google dos historias distintas.
- * - **La portada y las páginas de sección:** la fecha del artículo más reciente que
- *   listan. No es una fecha inventada: esas páginas cambian de verdad cuando entra una
+ * - **La portada, el archivo `/articulos` y las páginas de sección:** la fecha del artículo
+ *   más reciente que listan. No es una fecha inventada: esas páginas cambian de verdad cuando entra una
  *   pieza, y la portada es la URL que Google vuelve a mirar para descubrir lo nuevo.
  * - **Las institucionales** (`/contacto`, `/privacidad`, `/quien-escribe`…): **nada**. No
  *   hay una fecha real que poner y el sitemap no es sitio para adivinar. Un `<lastmod>`
@@ -135,6 +135,7 @@ export function mapaDeLastmod(): Map<string, string> {
   for (const { slug, seccion, lastmod } of leerFichas()) {
     mapa.set(`/articulos/${slug}`, lastmod);
     masReciente('/', lastmod);
+    masReciente('/articulos', lastmod);
     masReciente(`/seccion/${seccion}`, lastmod);
   }
 

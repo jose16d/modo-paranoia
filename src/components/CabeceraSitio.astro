@@ -2,6 +2,13 @@
 import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
 
 const rutaActual = Astro.url.pathname;
+
+/*
+ * Con `build.format: 'file'` la ruta del archivo llega como `/articulos.html` al compilar y
+ * como `/articulos` en desarrollo: se aceptan las dos. Las páginas de cada artículo
+ * (`/articulos/{id}`) no cuentan: el archivo es la lista, no la pieza.
+ */
+const enArchivo = /^\/articulos(\.html)?$/.test(rutaActual);
 ---
 
 <header class="cabecera">
@@ -24,6 +31,7 @@ const rutaActual = Astro.url.pathname;
             </li>
           ))
         }
+        <li><a href="/articulos" aria-current={enArchivo ? 'page' : undefined}>Archivo</a></li>
         <li><a href="/quien-escribe">Quién escribe</a></li>
       </ul>
     </nav>
