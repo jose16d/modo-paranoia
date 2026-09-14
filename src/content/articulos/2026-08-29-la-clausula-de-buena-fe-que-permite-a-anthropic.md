@@ -30,7 +30,7 @@ fuentes:
 
 ![fotografía en ángulo de una pantalla que muestra la página de inicio de Claude en modo oscuro, con el titular «Meet your thinking partner» y el campo de entrada de texto.](./2026-08-29-la-clausula-de-buena-fe-que-permite-a-anthropic-01.webp)
 
-*Página de inicio de Claude, la interfaz de consumo cubierta por la política de privacidad vigente desde el 8 de julio de 2026.*
+*Página de inicio de Claude, la interfaz de consumo cubierta por la política de privacidad vigente desde el 8 de julio de 2026. Foto de Planet Volumes en Unsplash.*
 
 El documento es la política de privacidad de Anthropic PBC, la empresa que opera Claude. La versión que analizamos abre con una línea sola: "Effective July 8, 2026". Reemplazó a la del 28 de septiembre de 2025.
 

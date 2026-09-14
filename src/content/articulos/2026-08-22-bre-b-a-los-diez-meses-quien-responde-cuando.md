@@ -3,7 +3,7 @@ titulo: 'Bre-B a los diez meses: quién responde cuando la transferencia sale ma
 bajada: Diez meses y 111 millones de llaves después, la regulación de Bre-B explica cómo se mueve el dinero y no dice quién asume la pérdida cuando lo mueve un estafador.
 seccion: lo-bueno-lo-malo-lo-feo
 imagen: ./2026-08-22-bre-b-a-los-diez-meses-quien-responde-cuando-01.webp
-imagenAlt: 'Logotipo de Bre-B en letras turquesa sobre un círculo azul, rodeado de monedas moradas flotantes y un símbolo de flechas de intercambio con un signo de dólar.'
+imagenAlt: 'Ilustración generada con IA: una persona sostiene un celular con una pantalla ficticia de confirmación de una transferencia Bre-B, junto a una taza de café.'
 fecha: 2026-08-22
 etiquetas: ['Colombia', 'Bre-B', 'pagos inmediatos', 'LATAM']
 borrador: false
@@ -62,7 +62,9 @@ Cómo se ve eso en la práctica lo mostró un fallo reciente. Un cliente demand�
 
 Y el volumen no es marginal. Asobancaria contabilizó más de 218.000 reclamaciones por fraude en canales financieros solo en el primer semestre de 2025, y el estudio Fraude en Colombia 2025 de DataCrédito encontró que el 36,6% de los encuestados dice haber sido víctima directa en los últimos doce meses (Bloomberg Línea, 3 de enero de 2026). Cuántas de esas reclamaciones corresponden a Bre-B es un dato que no existe públicamente: el Emisor publica llaves registradas y órdenes de pago liquidadas, pero no una serie de fraude. Sin fuente localizada.
 
-![Ilustración del logotipo de Bre-B: la palabra en letras turquesa sobre un círculo azul, rodeada de monedas moradas flotantes y un símbolo de flechas de intercambio con un signo de dólar.](./2026-08-22-bre-b-a-los-diez-meses-quien-responde-cuando-01.webp)
+![Ilustración generada con IA: una persona sostiene un celular con una pantalla ficticia de confirmación de una transferencia Bre-B, junto a una taza de café.](./2026-08-22-bre-b-a-los-diez-meses-quien-responde-cuando-01.webp)
+
+*Ilustración generada con IA (Gemini). La pantalla es inventada: no reproduce la aplicación de ningún banco ni la interfaz real de Bre-B.*
 
 ### Lo feo
 
