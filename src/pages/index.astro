@@ -7,7 +7,15 @@ import { obtenerArticulos } from '../lib/articulos';
 import { SECCIONES, CLAVES_SECCION, SITIO } from '../lib/secciones';
 
 const articulos = await obtenerArticulos();
+
+/*
+ * La portada enseña la pieza más reciente en grande y las 6 siguientes: casi dos ciclos
+ * editoriales de cuatro sábados. Todo lo demás vive en /articulos. Sin este límite, la
+ * portada crecería una tarjeta con imagen cada sábado, unas 48 al año.
+ */
+const PIEZAS_BAJO_LA_GRANDE = 6;
 const [portada, ...resto] = articulos;
+const recientes = resto.slice(0, PIEZAS_BAJO_LA_GRANDE);
 ---
 
 <Base titulo={SITIO.nombre} descripcion={SITIO.descripcion}>
@@ -41,15 +49,21 @@ const [portada, ...resto] = articulos;
           <TarjetaArticulo articulo={portada} grande />
         </section>
 
-        {resto.length > 0 && (
-          <section class="contenedor">
+        <section class="contenedor">
+          {recientes.length > 0 && (
             <div class="rejilla">
-              {resto.map((articulo) => (
+              {recientes.map((articulo) => (
                 <TarjetaArticulo articulo={articulo} />
               ))}
             </div>
-          </section>
-        )}
+          )}
+          <p class="archivo">
+            <a class="boton boton--fantasma" href="/articulos">
+              Todos los artículos
+              <Icono nombre="flecha-derecha" tam="1em" />
+            </a>
+          </p>
+        </section>
       </>
     )
   }
@@ -180,5 +194,9 @@ const [portada, ...resto] = articulos;
 
   .vacio {
     padding-block: 2rem;
+  }
+
+  .archivo {
+    margin-block-start: 1.6rem;
   }
 </style>

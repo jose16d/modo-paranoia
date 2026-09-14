@@ -28,7 +28,8 @@ flowchart TD
 
     subgraph salidas["4 · astro build — archivos en dist/"]
         direction TB
-        POR["/<br/>la pieza más reciente, en grande"]
+        POR["/<br/>la más reciente en grande y 6 más"]
+        ARC["/articulos<br/>todas, agrupadas por año"]
         ART["/articulos/{id}<br/>canónica, og:image y JSON-LD"]
         LIS["/seccion/{seccion}<br/>/etiquetas y /etiqueta/{clave}"]
         OG["/og/{id}.png<br/>satori + sharp, 1200×630"]
@@ -48,6 +49,7 @@ flowchart TD
     AUT --> ZOD
     CHK -->|Sí| OBT
     OBT --> POR
+    OBT --> ARC
     OBT --> ART
     OBT --> LIS
     OBT --> OG
