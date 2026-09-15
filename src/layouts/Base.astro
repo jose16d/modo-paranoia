@@ -157,7 +157,14 @@ const jsonLd = esArticulo
     <meta property="og:description" content={descripcion} />
     <meta property="og:url" content={canonica} />
     <meta property="og:site_name" content={SITIO.nombre} />
-    <meta property="og:locale" content="es_CO" />
+    {
+      /*
+       * Open Graph pide `idioma_TERRITORIO` y no admite `es` a secas. `es_LA` no es ISO (LA es
+       * Laos): es el código que Meta documenta como su locale paraguas del español, y es lo más
+       * cerca de un español neutro. Cambiarlo por `es_ES` o `es_CO` declara un país.
+       */
+    }
+    <meta property="og:locale" content="es_LA" />
     <meta property="og:image" content={imagenAbsoluta} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

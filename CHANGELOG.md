@@ -13,6 +13,14 @@ en español.
 - **Se mantiene en el mismo PR del cambio:** cada PR añade su línea bajo la fecha en que se
   fusiona.
 
+## 2026-09-14
+
+### Cambiado
+
+- El idioma declarado deja de ser el español de Colombia: `og:locale` pasa de `es_CO` a
+  `es_LA`, el código de Meta para el español general, y el RSS pasa de `es-CO` a `es`.
+  ([#53](https://github.com/jose16d/modo-paranoia/pull/53))
+
 ## 2026-09-13
 
 ### Añadido

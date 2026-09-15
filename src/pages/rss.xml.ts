@@ -41,7 +41,7 @@ export const GET: APIRoute = async ({ site }) => {
     <title>${escapar(SITIO.nombre)}</title>
     <link>${base}</link>
     <description>${escapar(SITIO.descripcion)}</description>
-    <language>es-CO</language>
+    <language>es</language>
     <atom:link href="${base}/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
   </channel>
