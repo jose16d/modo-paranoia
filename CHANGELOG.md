@@ -21,6 +21,12 @@ en español.
   `es_LA`, el código de Meta para el español general, y el RSS pasa de `es-CO` a `es`.
   ([#53](https://github.com/jose16d/modo-paranoia/pull/53))
 
+### Corregido
+
+- `@astrojs/sitemap` 3.7.4: la portada sale en el sitemap como `https://modoparanoia.com/`,
+  igual que su canónica, en lugar de sin la barra final.
+  ([#54](https://github.com/jose16d/modo-paranoia/pull/54))
+
 ## 2026-09-13
 
 ### Añadido
